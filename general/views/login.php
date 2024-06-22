@@ -7,14 +7,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>SIFEI / LOGIN</title>
+    <title>ORDERS / LOGIN</title>
     <meta content="SINAMA" name="description">
     <meta content="SINAMA" name="keywords">
-
-    <!-- Favicons -->
-    <link href="images/gob.png" rel="icon">
-    <link href="images/gob.png" rel="apple-touch-icon">
-
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -67,7 +62,7 @@
                   <div style="margin-top: -8%!important;">
                     <h5 class="card-title text-center pb-0 fs-4">¡BIENVENIDO/A!
                   </h5>
-                    <p class="text-center small">Sistema Integral de Facturación en Inventario
+                    <p class="text-center small">Sistema de toma de ordenes
                     </p>
                   </div>
 

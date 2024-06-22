@@ -37,7 +37,7 @@ class Usuario
     function obtenerById()
     {
         $respuesta = new stdClass();
-        $sql = "SELECT usu.id, usu.nombre, usu.email, rol.id as idRol, rol.nombre as nombreRol, usu.claveTemporal  FROM general_usuarios usu
+        $sql = "SELECT usu.id, usu.nombre, usu.email, rol.id as idRol, rol.nombre as nombreRol, usu.claveTemporal, usu.usuario  FROM general_usuarios usu
           inner join general_roles rol on usu.idRol = rol.id where usu.id = {$this->id} and usu.eliminado = 'N'";
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {

@@ -11,21 +11,21 @@
         </li>
 
 <!--        ROL administrador-->
-        <?php if ($_SESSION['general']['usuario'][0]->idRol) { ?>
+        <?php if ($_SESSION['general']['usuario'][0]->idRol ==1) { ?>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="fas fa-tools"></i><span>Configuraciones Generales</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="?module=general&page=datos_empresa" id="datos_empresa">
-                            <i class="bi bi-circle"></i><span>Datos Empresa</span>
-                        </a>
-                    </li>
-
-                </ul>
+<!--                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">-->
+<!--                    <li>-->
+<!--                        <a href="?module=general&page=datos_empresa" id="datos_empresa">-->
+<!--                            <i class="bi bi-circle"></i><span>Datos Empresa</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!---->
+<!--                </ul>-->
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="?module=general&page=adm_usuarios" id="adm_usuarios">
@@ -37,93 +37,61 @@
             </li><!-- End Components Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Catálogos</span><i class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed" data-bs-target="#productos" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-boxes-packing"></i><span>Productos</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="productos" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="?module=administracion&page=cat_adm_tipo_unidad_ambiental" id="cat_adm_tipo_unidad_ambiental">
-                            <i class="bi bi-circle"></i><span>Adminsitrar Tipos de Unidades</span>
+                        <a href="?module=productos&page=productos_administrar" id="productos_administrar">
+                            <i class="bi bi-circle"></i><span>Adminsitrar Productos</span>
+                        </a>
+                        <a href="?module=productos&page=producto" id="producto">
+                            <i class="bi bi-circle"></i><span>Nuevo Producto</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#clientes" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-users"></i><span>Clientes</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="clientes" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="?module=clientes&page=clientes_administrar" id="clientes_administrar">
+                            <i class="bi bi-circle"></i><span>Adminsitrar Clientes</span>
+                        </a>
+                        <a href="?module=clientes&page=cliente" id="cliente">
+                            <i class="bi bi-circle"></i><span>Nuevo Cliente</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#ordenes" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-cart-shopping"></i><span>Ordenes</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="ordenes" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="?module=ordenes&page=ordenes_administrar" id="ordenes_administrar">
+                            <i class="bi bi-circle"></i><span>Ver  Ordenes</span>
                         </a>
                     </li>
                     <li>
-                        <a href="?module=administracion&page=cat_adm_segmentos_uai" id="cat_adm_segmentos_uai">
-                            <i class="bi bi-circle"></i><span>Administrar Segmentos</span>
+                        <a href="?module=ordenes&page=orden" id="orden">
+                            <i class="bi bi-circle"></i><span>Nueva Orden</span>
                         </a>
                     </li>
                 </ul>
             </li><!-- End Forms Nav -->
         <?php }?>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#hga" data-bs-toggle="collapse" href="#">
-                    <i class="fa-solid fa-list-check"></i><span>Gestión Ambiental</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="hga" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <?php if ($_SESSION['general']['usuario']["tipoUsuario"] == 1) { ?>
-                        <li>
-                            <a href="?module=hga&page=dashboard" id="dashboard">
-                                <i class="bi bi-circle"></i><span>Dashboard Institucional</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="?module=hga&page=dashboardM" id="dashboardM">
-                                <i class="bi bi-circle"></i><span>Dashboard Municipal</span>
-                            </a>
-                        </li>
-                    <?php }else{ ?>
-                        <li>
-                            <a href="?module=hga&page=dashboard_unidad_ambiental" id="dashboardM">
-                                <i class="bi bi-circle"></i><span>Dashboard</span>
-                            </a>
-                        </li>
-                    <?php }?>
-                    <li>
-                        <a href="?module=hga&page=adm_herramienta_tecnica" id="adm_herramienta_tecnica">
-                            <i class="bi bi-circle"></i><span>Herramienta Técnica</span>
-                        </a>
-                    </li>
-                </ul>
-            </li><!-- End Forms Nav -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-toggle="collapse" href="#ecobalance">
-                <i class="fa-solid fa-earth-americas"></i><span>Ecoeficiencia</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="ecobalance2" class="nav-content" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="?module=ecobalance&page=home" id="home">
-                        <i class="bi bi-grid"  style="font-size: 15px!important;"></i><span>Home</span>
-                    </a>
-                </li>
-
-                    <li>
-                        <a href="?module=ecobalance&page=dashboard_general" id="dashboard_general">
-                            <i class="fa-solid fa-chart-line" style="font-size: 15px!important;"></i><span>Dashboard Ecoeficiencia</span>
-                        </a>
-                    </li>
-            </ul>
-            <ul id="ecobalance" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-
-                <li class="nav-item">
-                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#EcoeficienciaPapel">
-                            <i class="fa-solid fa-scroll" style="font-size: 15px!important;"></i><span>Papel</span><i class="bi bi-chevron-down ms-auto" style="font-size: 14px;"></i>
-                        </a>
-                        <ul id="EcoeficienciaPapel" class="nav-content collapse" data-bs-parent="#Ecoeficiencia">
-                            <li style="margin-left: 20px!important;">
-                                    <a href="?module=ecobalance&page=papel_dashboard" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="papel_dashboard">
-                                        <i class="bi bi-circle"></i><span>Dashboard</span>
-                                    </a>
-
-                            </li>
-                        </ul>
-                    </li>
-            </ul>
-        </li>
+<!--        ROL DE VENDEDOR-->
 
 
         <li class="nav-item">
             <hr>
-            <a class="nav-link collapsed" onclick="general.cerrarSesion()">
+            <a class="nav-link collapsed" onclick="generales.cerrarSesion()">
                 <i class="bi bi-box-arrow-left"></i>
                 <span>Cerrar Sesión</span>
             </a>

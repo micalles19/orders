@@ -34,16 +34,21 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
                     <h5 class="card-title"><?php echo $nombre ?> Usuario</h5>
                     <!-- Multi Columns Form -->
                     <form class="row g-3">
-                        <div class="col-md-8">
+                        <div class="col-md-4">
                             <label for="txtNombres" class="form-label">Nombre Completo</label>
                             <input type="text" class="form-control validar" id="txtNombres" placeholder="Juan">
                             <div class="invalid-feedback">Por favor ingrese un nombre</div>
                         </div>
 
                         <div class="col-md-4">
-                            <label for="txtCorreo" class="form-label">Correo </label>
+                            <label for="txtCorreo" class="form-label">Correo Reestablecimiento</label>
                             <input type="email" class="form-control validar" id="txtCorreo" placeholder="juan@example.com">
                             <div class="invalid-feedback">Formato de Correo Incorrecto</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtUsuario" class="form-label">Usuario </label>
+                            <input type="text" class="form-control validar" id="txtUsuario" placeholder="usuario">
+                            <div class="invalid-feedback">Ingrese un usuario</div>
                         </div>
                         <div class="col-md-4" id="divClave">
                             <div class="password-container">

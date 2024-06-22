@@ -49,7 +49,7 @@ const auth = {
                 modulo: "general",
                 archivo: "procesarUsuario",
                 datos: {
-                    email: document.getElementById("txtUsuario").value.trim(),
+                    usuario: document.getElementById("txtUsuario").value.trim(),
                     clave: document.getElementById("txtClave").value.trim(),
                     accion: "iniciarSesion"
                 }
@@ -133,7 +133,7 @@ const auth = {
                 modulo: "general",
                 archivo: "procesarUsuario",
                 datos: {
-                    email: document.getElementById("txtUsuario").value.trim(),
+                    usuario: document.getElementById("txtUsuario").value.trim(),
                     accion: "validarUsuario"
                 }
             }).then((respuesta) => {

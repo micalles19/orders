@@ -13,6 +13,7 @@ const usuario = {
     id: document.getElementById("hdnId"),
     nombres: document.getElementById("txtNombres"),
     correo: document.getElementById("txtCorreo"),
+    usuario: document.getElementById("txtUsuario"),
     rol: document.getElementById("cboRolUsuario"),
     clave: document.getElementById("txtClave"),
 
@@ -37,6 +38,8 @@ const usuario = {
                 this.nombres.value = usuario.nombre;
                 this.correo.value = usuario.email;
                 this.rol.value = usuario.idRol;
+                this.usuario.value = usuario.usuario;
+                this.usuario.style.readOnly =true;
                 this.clave.value = usuario.claveTemporal;
                 resolve();
             } else {
@@ -53,6 +56,7 @@ const usuario = {
                     accion: "guardar",
                     nombres: this.nombres.value.trim(),
                     email: this.correo.value.trim(),
+                    usuario: this.correo.value.trim(),
                     clave: this.clave.value.trim(),
                     rol: this.rol.value.trim()
                 }
