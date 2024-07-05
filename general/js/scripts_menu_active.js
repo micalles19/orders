@@ -14,33 +14,67 @@ const obtenerParametroUrl = (nombreParametro) => {
 var formulario = obtenerParametroUrl('page');
 var modulo = obtenerParametroUrl('module');
 switch (modulo) {
-    case "ecobalance":
-        var ecobalanceElement = document.querySelector("#ecobalance");
+    case "clientes":
+        var ecobalanceElement = document.querySelector("#clientes");
         ecobalanceElement.classList.remove("collapse");
-        let eco = document.querySelectorAll("#ecobalance .nav-item a")
+        let eco = document.querySelectorAll("#clientes a")
+        eco.forEach(function (link) {
+            link.classList.remove('active');
+            var parentCollapse = link.closest('.collapse');
+            if (parentCollapse) {
+                parentCollapse.classList.remove('show');
+                var parentLink = parentCollapse.previousElementSibling;
+                if (parentLink) {
+                    parentLink.classList.remove('active');
+                }
+            }
+        });
+
+        // Luego, agrega la clase 'active' al enlace seleccionado y su elemento colapsable padre
         eco.forEach(function (link) {
             var href = link.getAttribute('id');
-            if (formulario.indexOf(href) !== -1) {
+            if (formulario === href) {
                 link.classList.add('active');
                 var parentCollapse = link.closest('.collapse');
                 if (parentCollapse) {
                     var parentLink = parentCollapse.previousElementSibling;
-                    parentLink.classList.add('active');
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
                     parentCollapse.classList.add('show');
                 }
             }
         });
-        var ecobalanceElement2 = document.querySelector("#ecobalance2");
-        ecobalanceElement2.classList.remove("collapse");
-        let eco2 = document.querySelectorAll("#ecobalance2 a")
-        eco2.forEach(function (link) {
+        break;
+
+    case "catalogos":
+        var catal = document.querySelector("#catalogos");
+        catal.classList.remove("collapse");
+        let cat = document.querySelectorAll("#catalogos a")
+        // Primero, elimina la clase 'active' de todos los enlaces y elementos colapsables
+        cat.forEach(function (link) {
+            link.classList.remove('active');
+            var parentCollapse = link.closest('.collapse');
+            if (parentCollapse) {
+                parentCollapse.classList.remove('show');
+                var parentLink = parentCollapse.previousElementSibling;
+                if (parentLink) {
+                    parentLink.classList.remove('active');
+                }
+            }
+        });
+
+        // Luego, agrega la clase 'active' al enlace seleccionado y su elemento colapsable padre
+        cat.forEach(function (link) {
             var href = link.getAttribute('id');
-            if (formulario.indexOf(href) !== -1) {
+            if (formulario === href) {
                 link.classList.add('active');
                 var parentCollapse = link.closest('.collapse');
                 if (parentCollapse) {
                     var parentLink = parentCollapse.previousElementSibling;
-                    parentLink.classList.add('active');
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
                     parentCollapse.classList.add('show');
                 }
             }
@@ -79,24 +113,7 @@ switch (modulo) {
             }
         });
         break;
-    case "hga":
-        var element = document.querySelector("#hga");
-        element.classList.remove("collapse");
 
-        let hga = document.querySelectorAll("#hga a")
-        hga.forEach(function (link) {
-            var href = link.getAttribute('id');
-            if (formulario.indexOf(href) !== -1) {
-                link.classList.add('active');
-                var parentCollapse = link.closest('.collapse');
-                if (parentCollapse) {
-                    var parentLink = parentCollapse.previousElementSibling;
-                    parentLink.classList.add('active');
-                    parentCollapse.classList.add('show');
-                }
-            }
-        });
-        break;
 
     case "transversalizacion":
         var trans = document.querySelector("#transversalizacion");

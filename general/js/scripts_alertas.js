@@ -101,16 +101,6 @@ function mensajesAlertas(error = {}) {
                     location.reload();
                 })
                 break;
-            case "SIN_UA_ASIGNADAS":
-                Swal.fire({
-                    position: 'top-end',
-                    icon: "info",
-                    title: "Sin unidad Ambiental Asignada",
-                    text: "No posees unidad ambiental Asignada, favor contacta con el departamento de IT",
-                    showConfirmButton: false,
-                    timer: 4000
-                }).then()
-                break;
             case "USUARIO_BLOQUEADO_LOGIN":
                 Swal.fire({
                     position: 'top-end',
@@ -162,16 +152,7 @@ function mensajesAlertas(error = {}) {
                     location.reload()
                 })
                 break;
-            case "EVAL_ACTIVA":
-                Swal.fire({
-                    title: 'Upss!',
-                    text: "Ya se encuentra una herramienta técnica activa actualmente, solo puedes tener una herramienta técnica activa al mismo tiempo",
-                    icon: 'info',
-                    showCancelButton: false,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'ok'
-                })
-                break;
+
             case "NO_USUARIOS_ASIGNABLES":
                 Swal.fire({
                     title: 'Upss!',
@@ -309,6 +290,15 @@ function mensajesAlertas(error = {}) {
                     position: 'top-end',
                     icon: "info",
                     title: "Se han detectado campos incompletos",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                break;
+                case 'CONFIGURAR_PRECIOS':
+                Swal.fire({
+                    position: 'top-end',
+                    icon: "info",
+                    title: "Debes de configurar los precios",
                     showConfirmButton: false,
                     timer: 1500
                 });

@@ -14,7 +14,6 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: url('https://via.placeholder.com/150'); /* Imagen de fondo */
         background-size: cover;
         background-position: center;
     }
@@ -199,7 +198,8 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
                                                         <div class="card-body">
                                                             <div class="d-flex justify-content-between align-items-center">
                                                                 <p class="mb-0" style="padding-top: 2%">Escala de Precios</p>
-                                                                <button type="button" id="btnAgregarEscalaPrecios" class="btn btn-outline-dark btn-sm" style="margin-top: 2%">Nueva Escala</button>
+                                                                <button type="button" id="btnAgregarEscalaPrecios" class="btn btn-outline-dark btn-sm" style="margin-top: 2%"
+                                                                onclick="producto.mdlAgregarEscalaPrecio()">Nueva Escala</button>
                                                             </div>
                                                             <hr>
                                                             <table class="table table-striped" id="tblEscalaPrecios">
@@ -213,6 +213,39 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
                                                                 <tbody>
                                                                 </tbody>
                                                             </table>
+<!--                                                            MODAL ESCALA POR CANTIDADES-->
+                                                            <div class="modal fade" id="mdlEscalaPrecio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-md">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">Configurar Escala por Precios</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="row">
+                                                                                <input type="hidden" id="hdnIdPrecio" value="0">
+                                                                                <div class="col-md-6">
+                                                                                    <label for="txtPrecioCantidad" class="form-label">Precio</label>
+                                                                                    <input type="text" class="form-control validarPrecio limpiarMdl" id="txtPrecio"
+                                                                                           oninput="validar.esNumeroDecimal(event,'txtPrecio')" maxlength="11">
+                                                                                    <div class="invalid-feedback">Ingrese un precio</div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <label for="txtComisionCantidad" class="form-label">% Comision</label>
+                                                                                    <input type="text" class="form-control limpiarMdl" id="txtComisionPrecio"
+                                                                                           oninput="validar.esNumeroDecimal(event,'txtComisionPrecio')" maxlength="11">
+                                                                                    <div class="invalid-feedback">Ingrese una comison</div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                            <button type="button" class="btn btn-primary" onclick="producto.agregarEscalaPrecio()">Guardar</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -228,13 +261,9 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
                 </div>
                 <div class="card-footer">
                     <div class="text-center">
-                        <?php if($id == 0) {?>
-                            <button type="button" onclick="usuario.validarCampos()" class="btn btn-success">Guardar</button>
-                        <?php } else{ ?>
-                            <button type="button" onclick="usuario.validarCamposUpd()" class="btn btn-success">Actualizar</button>
-                            <button type="button" onclick="usuario.cambiarClave()" class="btn btn-primary">Enviar Clave Temporal</button>
-                        <?php } ?>
-                        <button type="button" onclick="generales.atras('general','adm_usuarios')" class="btn btn-secondary">Cancelar</button>
+
+                            <button type="button" onclick="producto.validarCampos()" class="btn btn-success">Guardar</button>
+                        <button type="button" onclick="generales.atras('productos','productos_adminsitrar')" class="btn btn-secondary">Cancelar</button>
 
                     </div>
                 </div>

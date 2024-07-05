@@ -80,16 +80,16 @@ const generales = {
             Resolve();
         })
     },
-    construirCboSINAMA(nombreCbo, objDatos) {
+    construirCboDefault(nombreCbo, objDatos) {
         return new Promise(Resolve => {
             document.getElementById(nombreCbo).innerHTML = "";
-            document.getElementById(nombreCbo).innerHTML += "<option value='all' selected >SINAMA</option>";
+            document.getElementById(nombreCbo).innerHTML += "<option value='null' selected >No Aplica</option>";
             if (objDatos.mensaje === "EXITO") {
                 objDatos.datos.forEach(dato => {
                     document.getElementById(nombreCbo).innerHTML += "<option value='" + dato.id + "'>" + dato.nombre + "</option>";
                 })
             }
-            document.getElementById(nombreCbo).value = 'all';
+            document.getElementById(nombreCbo).value = 'null';
             Resolve();
         })
     },
@@ -267,7 +267,20 @@ const validar = {
             }
         }
         return true;
-    }
+    },
+    statusRadioButton(rbOpcion1, rbOpcion2) {
+    const rbExentoSi = document.getElementById(rbOpcion1);
+    const rbExentoNo = document.getElementById(rbOpcion2);
+        if (rbExentoSi.checked) {
+            return true;
+        } else if (rbExentoNo.checked) {
+           return true;
+        } else {
+            console.log("esta dando false el radio" +rbExentoSi.id)
+            $("#" + rbExentoSi.id).parent().parent().find(".invalid-feedback").fadeIn("fast");
+            return false;
+        }
+}
 };
 
 

@@ -1,6 +1,6 @@
-var tblEscalaCantidad;
-var tblEscalaPrecios;
-
+var tblEscalaCantidad,
+    tblEscalaPrecios,
+    frmDatos = new FormData();
 window.onload = () => {
     producto.inicializarDatatable().then(() => {
         producto.obtenerLineas().then(() => {
@@ -19,7 +19,8 @@ const producto = {
     nombreProducto: document.getElementById("txtNombre"),
     idLinea: document.getElementById("cboLinea"),
     idLineaSub: document.getElementById("cboLineaSub"),
-    idTmpCantidad:0,
+    idTmpCantidad: 0,
+    idTmpPrecio: 0,
     arrayEscalaCantidad: [],
     arrayEscalaPrecios: [],
 
@@ -50,7 +51,50 @@ const producto = {
         })
     },
 
-    // mostrar modales
+    // validar campos al insertar o actualizar
+    validarCampos() {
+        var validador = true;
+        if (validar.InputTextsConClase("validar") && validar.statusRadioButton("rbExentoSi", "rbExentoNo")) {
+            if (validar.statusRadioButton("rbEscalaCantidadSi", "rbEscalaCantidadNo")) {
+                if (this.arrayEscalaCantidad.length > 0){
+                    validador = true;
+                }else {
+                    validador = false;
+                    mensajesAlertas("CONFIGURAR_PRECIOS")
+                }
+            } else {
+                validador = false;
+                mensajesAlertas("VALIDACION_GENERAL");
+            }
+            if (validar.statusRadioButton("rbEscalaPrecioSi", "rbEscalaPrecioNo")) {
+                if (this.arrayEscalaCantidad.length  > 0){
+                    validador =  true;
+                }else {
+                    validador = false;
+                    mensajesAlertas("CONFIGURAR_PRECIOS")
+                }
+            } else {
+                validador = false;
+                mensajesAlertas("VALIDACION_GENERAL");
+            }
+        } else {
+            validador = false;
+            mensajesAlertas("VALIDACION_GENERAL");
+        }
+        if (validador){
+            console.log("mandar a llamar el guardado de datos");
+        }
+
+    },
+    guardarDatos() {
+        return new Promise(resolve => {
+            frmDatos.append("accion", "guardar")
+            frmDatos.append("accion", this.codigoFox.value.trim())
+        })
+    },
+
+
+    // Escala por cantidades
     mdlAgregarEscalaCantidad() {
         return new Promise(resolve => {
             validar.limpiarInputs("limpiarMdl").then(() => {
@@ -60,38 +104,36 @@ const producto = {
         })
 
     },
-
     agregarEscalaCantidad() {
-        if(validar.InputTextsConClase("validarCantidad")){
-            let idRow = document.getElementById("hdnIdCantidad").value.trim();
+        if (validar.InputTextsConClase("validarCantidad")) {
+            let idRow = parseInt(document.getElementById("hdnIdCantidad").value.trim(), 10);
+            if (idRow > 0) {
+                // eliminamos el item
+                this.arrayEscalaCantidad = this.arrayEscalaCantidad.filter(item => {
+                    console.log("Checking item:", item, "id :" + idRow);
+                    return item.id !== idRow;
+                });
+            }
             let datos = {
-                id: idRow == 0 ? ++this.idTmpCantidad : idRow,
+                id: this.idTmpCantidad += 1,
                 cantidadDesde: document.getElementById("txtDesdeCantidad").value.trim(),
                 cantidadHasta: document.getElementById("txtHastaCantidad").value.trim(),
                 precio: document.getElementById("txtPrecioCantidad").value.trim(),
                 comision: document.getElementById("txtComisionCantidad").value.trim()
             };
 
-            // if (idRow > 0) {
-            //     this.arrayEscalaCantidad.forEach()
-            //     // Eliminamos el item del arreglo si existe
-            //     this.arrayEscalaCantidad = this.arrayEscalaCantidad.filter(item => item.id !== idRow);
-            // }
-
             // Añadimos el nuevo item al arreglo
             this.arrayEscalaCantidad.push(datos);
+
             //limpiamos la tabla
             tblEscalaCantidad.clear();
             tblEscalaCantidad.columns.adjust().draw();
-        // Añadir la fila a la tabla y ajustar la vista
+
+            // Añadir la fila a la tabla y ajustar la vista
             var construirTable = new Promise(resolve => {
                 this.arrayEscalaCantidad.forEach(dato => {
-                    if(dato.id == idRow){
-
-                    }else{
-                        this.addRowTableCantidad(dato);
-                    }
-
+                    console.log(dato)
+                    this.addRowTableCantidad(dato);
                 });
                 resolve();
             });
@@ -102,26 +144,26 @@ const producto = {
             });
         }
     },
-    addRowTableCantidad({id,cantidadDesde,cantidadHasta,precio,comision}){
+    addRowTableCantidad({id, cantidadDesde, cantidadHasta, precio, comision}) {
 
-            tblEscalaCantidad.row.add([
-                cantidadDesde,cantidadHasta,
-                "$ "+precio,
-                comision +"%",
-                "<button class='btn btn-outline-info btn-sm' type='button' title='Ver' onclick=' producto.editarCantidadArray(" + id + ");'>" +
-                "<i class='bx bxs-cog'></i>" +
-                "</button>" +
-                "&nbsp;&nbsp;" +
-                "<button class='btn btn-outline-danger btn-sm' type='button' title='Eliminar' onclick=' producto.eliminarCantidadArray(" + id + ");'>" +
-                "<i class='ri-delete-bin-6-line'></i>" +
-                "</button>"
-            ]).node().id = "trSubCat"+id;
+        tblEscalaCantidad.row.add([
+            cantidadDesde, cantidadHasta,
+            "$ " + precio,
+            comision + "%",
+            "<button class='btn btn-outline-info btn-sm' type='button' title='Ver' onclick=' producto.editarCantidadArray(" + id + ");'>" +
+            "<i class='bx bxs-cog'></i>" +
+            "</button>" +
+            "&nbsp;&nbsp;" +
+            "<button class='btn btn-outline-danger btn-sm' type='button' title='Eliminar' onclick=' producto.eliminarCantidadArray(" + id + ");'>" +
+            "<i class='ri-delete-bin-6-line'></i>" +
+            "</button>"
+        ]).node().id = "trSubCat" + id;
 
     },
-    editarCantidadArray(id){
-        this.arrayEscalaCantidad.forEach(escala =>{
-            if (escala.id == id){
-                this.mdlAgregarEscalaCantidad().then(()=>{
+    editarCantidadArray(id) {
+        this.arrayEscalaCantidad.forEach(escala => {
+            if (escala.id == id) {
+                this.mdlAgregarEscalaCantidad().then(() => {
                     document.getElementById("hdnIdCantidad").value = escala.id;
                     document.getElementById("txtDesdeCantidad").value = escala.cantidadDesde;
                     document.getElementById("txtHastaCantidad").value = escala.cantidadHasta;
@@ -131,6 +173,132 @@ const producto = {
             }
         })
     },
+    eliminarCantidadArray(idRow) {
+        if (idRow > 0) {
+            // eliminamos el item
+            this.arrayEscalaCantidad = this.arrayEscalaCantidad.filter(item => {
+                console.log("Checking item:", item, "id :" + idRow);
+                return item.id !== idRow;
+            });
+            tblEscalaCantidad.clear();
+            tblEscalaCantidad.columns.adjust().draw();
+
+            // Añadir la fila a la tabla y ajustar la vista
+            var construirTable = new Promise(resolve => {
+                this.arrayEscalaCantidad.forEach(dato => {
+                    console.log(dato)
+                    this.addRowTableCantidad(dato);
+                });
+                resolve();
+            });
+
+            construirTable.then(() => {
+                tblEscalaCantidad.columns.adjust().draw();
+                $("#mdlEscalaCantidad").modal("hide");
+            });
+        }
+    },
+
+    //Escala de precios
+    mdlAgregarEscalaPrecio() {
+        return new Promise(resolve => {
+            validar.limpiarInputs("limpiarMdl").then(() => {
+                $("#mdlEscalaPrecio").modal("show");
+                resolve();
+            })
+        })
+
+    },
+    agregarEscalaPrecio() {
+        if (validar.InputTextsConClase("validarPrecio")) {
+            let idRow = parseInt(document.getElementById("hdnIdPrecio").value.trim(), 10);
+            if (idRow > 0) {
+                // eliminamos el item
+                this.arrayEscalaPrecios = this.arrayEscalaPrecios.filter(item => {
+                    console.log("Checking item:", item, "id :" + idRow);
+                    return item.id !== idRow;
+                });
+            }
+            let datos = {
+                id: this.idTmpPrecio += 1,
+                precio: document.getElementById("txtPrecio").value.trim(),
+                comision: document.getElementById("txtComisionPrecio").value.trim()
+            };
+
+            // Añadimos el nuevo item al arreglo
+            this.arrayEscalaPrecios.push(datos);
+
+            //limpiamos la tabla
+            tblEscalaPrecios.clear();
+            tblEscalaPrecios.columns.adjust().draw();
+
+            // Añadir la fila a la tabla y ajustar la vista
+            var construirTable = new Promise(resolve => {
+                this.arrayEscalaPrecios.forEach(dato => {
+                    console.log(dato)
+                    this.addRowTablePrecio(dato);
+                });
+                resolve();
+            });
+
+            construirTable.then(() => {
+                tblEscalaPrecios.columns.adjust().draw();
+                $("#mdlEscalaPrecio").modal("hide");
+            });
+        }
+    },
+    addRowTablePrecio({id, precio, comision}) {
+        tblEscalaPrecios.row.add([
+            "$ " + precio,
+            comision + "%",
+            "<button class='btn btn-outline-info btn-sm' type='button' title='Ver' onclick=' producto.editarPrecioArray(" + id + ");'>" +
+            "<i class='bx bxs-cog'></i>" +
+            "</button>" +
+            "&nbsp;&nbsp;" +
+            "<button class='btn btn-outline-danger btn-sm' type='button' title='Eliminar' onclick=' producto.eliminarPrecioArray(" + id + ");'>" +
+            "<i class='ri-delete-bin-6-line'></i>" +
+            "</button>"
+        ]).node().id = "trSubCat" + id;
+
+    },
+    editarPrecioArray(id) {
+        this.arrayEscalaPrecios.forEach(escala => {
+            if (escala.id == id) {
+                this.mdlAgregarEscalaPrecio().then(() => {
+                    document.getElementById("hdnIdPrecio").value = escala.id;
+                    document.getElementById("txtPrecio").value = escala.precio;
+                    document.getElementById("txtComisionPrecio").value = escala.comision;
+                })
+            }
+        })
+    },
+    eliminarPrecioArray(idRow) {
+        if (idRow > 0) {
+            // eliminamos el item
+            this.arrayEscalaPrecios = this.arrayEscalaPrecios.filter(item => {
+                console.log("Checking item:", item, "id :" + idRow);
+                return item.id !== idRow;
+            });
+            tblEscalaPrecios.clear();
+            tblEscalaPrecios.columns.adjust().draw();
+
+            // Añadir la fila a la tabla y ajustar la vista
+            var construirTable = new Promise(resolve => {
+                this.arrayEscalaPrecios.forEach(dato => {
+                    console.log(dato)
+                    this.addRowTablePrecio(dato);
+                });
+                resolve();
+            });
+
+            construirTable.then(() => {
+                tblEscalaPrecios.columns.adjust().draw();
+                $("#mdlEscalaPrecio").modal("hide");
+            });
+        }
+    },
+
+
     // validadores
     validarEscalaCantidad(valor) {
         if (valor === 'S') {

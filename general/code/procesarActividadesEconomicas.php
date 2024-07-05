@@ -1,4 +1,6 @@
 <?php
+
+
 header("Content-type: application/json; charset=utf-8");
 $input = json_decode(file_get_contents("php://input"), true);
 session_start();
@@ -12,13 +14,13 @@ if (!empty($_GET)) {
     $accion = isset($input['accion']) ? $input['accion'] : "";
 }
 include '../../general/code/MySQL_conection.php';
-include_once './Clases/Departamentos.php';
+include_once './Clases/ActividadesEconomicas.php';
 date_default_timezone_set('America/El_Salvador');
-$departamentos = new Departamentos();
+$actividades = new ActividadesEconomicas();
 
 switch ($accion) {
     case "obtener":
-        $respuesta = $departamentos->Obtener();
+        $respuesta = $actividades->Obtener();
         break;
     default:
         $respuesta = $accion;
