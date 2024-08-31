@@ -80,6 +80,105 @@ switch (modulo) {
             }
         });
         break;
+    case "marcas":
+        var marcas = document.querySelector("#marcas");
+        marcas.classList.remove("collapse");
+        let marca = document.querySelectorAll("#marcas a")
+        // Primero, elimina la clase 'active' de todos los enlaces y elementos colapsables
+        marca.forEach(function (link) {
+            link.classList.remove('active');
+            var parentCollapse = link.closest('.collapse');
+            if (parentCollapse) {
+                parentCollapse.classList.remove('show');
+                var parentLink = parentCollapse.previousElementSibling;
+                if (parentLink) {
+                    parentLink.classList.remove('active');
+                }
+            }
+        });
+
+        // Luego, agrega la clase 'active' al enlace seleccionado y su elemento colapsable padre
+        marca.forEach(function (link) {
+            var href = link.getAttribute('id');
+            if (formulario === href) {
+                link.classList.add('active');
+                var parentCollapse = link.closest('.collapse');
+                if (parentCollapse) {
+                    var parentLink = parentCollapse.previousElementSibling;
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
+                    parentCollapse.classList.add('show');
+                }
+            }
+        });
+        break;
+    case "proveedores":
+        var proveedores = document.querySelector("#proveedores");
+        proveedores.classList.remove("collapse");
+        let proveedor = document.querySelectorAll("#proveedores a")
+        // Primero, elimina la clase 'active' de todos los enlaces y elementos colapsables
+        proveedor.forEach(function (link) {
+            link.classList.remove('active');
+            var parentCollapse = link.closest('.collapse');
+            if (parentCollapse) {
+                parentCollapse.classList.remove('show');
+                var parentLink = parentCollapse.previousElementSibling;
+                if (parentLink) {
+                    parentLink.classList.remove('active');
+                }
+            }
+        });
+
+        // Luego, agrega la clase 'active' al enlace seleccionado y su elemento colapsable padre
+        proveedor.forEach(function (link) {
+            var href = link.getAttribute('id');
+            if (formulario === href) {
+                link.classList.add('active');
+                var parentCollapse = link.closest('.collapse');
+                if (parentCollapse) {
+                    var parentLink = parentCollapse.previousElementSibling;
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
+                    parentCollapse.classList.add('show');
+                }
+            }
+        });
+        break;
+    case "productos":
+        var productos = document.querySelector("#productos");
+        productos.classList.remove("collapse");
+        let producto = document.querySelectorAll("#productos a")
+        // Primero, elimina la clase 'active' de todos los enlaces y elementos colapsables
+        producto.forEach(function (link) {
+            link.classList.remove('active');
+            var parentCollapse = link.closest('.collapse');
+            if (parentCollapse) {
+                parentCollapse.classList.remove('show');
+                var parentLink = parentCollapse.previousElementSibling;
+                if (parentLink) {
+                    parentLink.classList.remove('active');
+                }
+            }
+        });
+
+        // Luego, agrega la clase 'active' al enlace seleccionado y su elemento colapsable padre
+        producto.forEach(function (link) {
+            var href = link.getAttribute('id');
+            if (formulario === href) {
+                link.classList.add('active');
+                var parentCollapse = link.closest('.collapse');
+                if (parentCollapse) {
+                    var parentLink = parentCollapse.previousElementSibling;
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
+                    parentCollapse.classList.add('show');
+                }
+            }
+        });
+        break;
 
     case "educacion_ambiental":
         var eduElemnet = document.querySelector("#educacion_ambiental");

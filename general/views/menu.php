@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#catalogos" data-bs-toggle="collapse" href="#">
-                    <i class="fa-regular fa-bookmark"></i><span>Categorias, Catálogos & Marcas</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="fa-regular fa-bookmark"></i><span>Catálogos, Categorias & Sub Categorias</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="catalogos" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
@@ -57,12 +57,31 @@
                         </a>
                     </li>
                     <li>
-                        <a href="?module=catalogos&page=administrar_marcas" id="administrar_marcas">
+                        <a href="?module=catalogos&page=administrar_sub_categorias" id="administrar_sub_categorias">
+                            <i class="bi bi-circle"></i><span>Administrar Sub Categoría</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?module=catalogos&page=sub_categoria" id="sub_categoria">
+                            <i class="bi bi-circle"></i><span>Nueva Sub Categoría</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#marcas" data-bs-toggle="collapse" href="#">
+                    <i class="fa-regular fa-bookmark"></i><span>Marcas</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="marcas" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="?module=marcas&page=administrar_marcas" id="administrar_marcas">
                             <i class="bi bi-circle"></i><span>Administrar Marcas</span>
                         </a>
                     </li>
                     <li>
-                        <a href="?module=catalogos&page=marca" id="marca">
+                        <a href="?module=marcas&page=marca" id="marca">
                             <i class="bi bi-circle"></i><span>Nueva Marca</span>
                         </a>
                     </li>
@@ -77,7 +96,7 @@
                 <ul id="productos" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="?module=productos&page=productos_administrar" id="productos_administrar">
-                            <i class="bi bi-circle"></i><span>Adminsitrar Productos</span>
+                            <i class="bi bi-circle"></i><span>Administrar Productos</span>
                         </a>
                         <a href="?module=productos&page=producto" id="producto">
                             <i class="bi bi-circle"></i><span>Nuevo Producto</span>
@@ -94,12 +113,29 @@
                 <ul id="clientes" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="?module=clientes&page=administrar_clientes" id="administrar_clientes">
-                            <i class="bi bi-circle"></i><span>Adminsitrar Clientes</span>
+                            <i class="bi bi-circle"></i><span>Administrar Clientes</span>
                         </a>
                     </li>
                     <li>
                         <a href="?module=clientes&page=cliente" id="cliente">
                             <i class="bi bi-circle"></i><span>Nuevo Cliente</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#proveedores" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-people-carry-box"></i><span>Proveedores</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="proveedores" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="?module=proveedores&page=administrar_proveedor" id="administrar_proveedor">
+                            <i class="bi bi-circle"></i><span>Administrar Proveedores</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?module=proveedores&page=proveedor" id="proveedor">
+                            <i class="bi bi-circle"></i><span>Nuevo Proveedor</span>
                         </a>
                     </li>
                 </ul>

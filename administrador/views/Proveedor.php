@@ -75,10 +75,10 @@ $nombre = $idProveedor != 0 ? "Editar" : "Registrar";
                     <?php
                     if ($idProveedor == 0) {
                         ?>
-                        <button type="button" onclick="proveedores.guardar();" class="btn btn-info">Guardar</button>
+                        <button type="button" onclick="proveedor.guardar();" class="btn btn-info">Guardar</button>
                     <?php } else {
                         ?>
-                        <button type="button" onclick="proveedores.actualizar();" class="btn btn-info">Actualizar</button>
+                        <button type="button" onclick="proveedor.actualizar();" class="btn btn-info">Actualizar</button>
                     <?php } ?>
 
                     <button type="button" class="btn btn-danger">Cancelar</button>

@@ -1,7 +1,7 @@
 var tblVerProyectosEspecificos = "";
 window.onload = () => {
     if (proveedores.idProveedor !== 0) {
-        clientes.obtener().then(() => {
+        proveedores.obtener().then(() => {
         })
     }
 

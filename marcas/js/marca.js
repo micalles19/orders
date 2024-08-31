@@ -12,7 +12,7 @@ const marca = {
     obtener() {
         return new Promise((resolve, reject) => {
             fetchActions.get({
-                modulo:"catalogos",
+                modulo:"marcas",
                 archivo: "procesarMarcas",
                 params: {
                     accion: "obtenerById",
@@ -36,7 +36,7 @@ const marca = {
     },
     guardar() {
         fetchActions.set({
-            modulo:"catalogos",
+            modulo:"marcas",
             archivo: "procesarMarcas",
             datos: {
                 accion: "guardar",
@@ -48,7 +48,7 @@ const marca = {
     },
     actualizar() {
         fetchActions.set({
-            modulo:"catalogos",
+            modulo:"marcas",
             archivo: "procesarMarcas",
             datos: {
                 accion: "actualizar",

@@ -24,9 +24,21 @@ $modulo = isset($_GET["module"]) && $_GET["module"] != null ? $_GET["module"] : 
                     <thead>
                     <tr>
                         <th scope="col">Codigo</th>
+                        <th scope="col">Imagen</th>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Marca</th>
+                        <th scope="col">Catalogo</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">SubCategoria</th>
                         <th scope="col">Exento</th>
-                        <th scope="col">Precio 2</th>
+                        <th scope="col">Precio <br>Compra S/IVA</th>
+                        <th scope="col">Precio <br>Compra C/IVA</th>
+
+                        <th scope="col">Precio <br> Venta S IVA</th>
+                        <th scope="col">Precio <br> Venta C IVA</th>
+                        <th scope="col">Valor <br>Descuento</th>
+                        <th scope="col">Precio <br> Final</th>
+                        <th scope="col">Disponible  <br>en Sucursales</th>
                         <th scope="col">Acciones</th>
                     </tr>
                     </thead>

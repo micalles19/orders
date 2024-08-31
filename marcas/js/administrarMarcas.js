@@ -15,13 +15,13 @@ const administrarMarcas = {
     obtenerCatalogos() {
         return new Promise((resolve, reject) => {
             fetchActions.get({
-                modulo: "catalogos",
+                modulo: "marcas",
                 archivo: "procesarMarcas",
                 params: {
                     accion: "obtenerByTable",
                 }
-            }).then((catalogos) => {
-                this.construirTable(catalogos).then(resolve)
+            }).then((marcas) => {
+                this.construirTable(marcas).then(resolve)
             })
         })
     },
@@ -44,7 +44,7 @@ const administrarMarcas = {
         })
     },
     editar(idCatalogo) {
-        window.location.href = "?module=catalogos&page=marca&id="+ btoa(idCatalogo)
+        window.location.href = "?module=marcas&page=marca&id="+ btoa(idCatalogo)
     },
     eliminar(id){
         Swal.fire({
@@ -58,7 +58,7 @@ const administrarMarcas = {
         }).then((result) => {
             if (result.isConfirmed) {
                 fetchActions.set({
-                    modulo: "catalogos",
+                    modulo: "marcas",
                     archivo: "procesarMarcas",
                     datos: {
                         id: id,

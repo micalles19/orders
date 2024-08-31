@@ -35,8 +35,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" id="btnAsignarCatalogo" onclick="clientes.agregarCatalogo()" class="btn btn-primary">Asignar Catálogo</button>
-                <button type="button" id="btnEditarCatalogo" style="display: none" onclick="clientes.actualizarCatalogo()" class="btn btn-primary">Actualizar Catálogo</button>
+                <button type="button" id="btnAsignarCatalogo" onclick="proveedor.agregarCatalogo()" class="btn btn-primary">Asignar Catálogo</button>
+                <button type="button" id="btnEditarCatalogo" style="display: none" onclick="proveedor.actualizarCatalogo()" class="btn btn-primary">Actualizar Catálogo</button>
             </div>
         </div>
     </div>

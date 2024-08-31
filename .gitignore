@@ -49,6 +49,7 @@ Thumbs.db
 *.wmv
 
 code/MySQL_conection.php
+productos/images/*
 
 database/
 .well-known/
