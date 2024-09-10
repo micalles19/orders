@@ -1,20 +1,17 @@
 <?php
 
-class Departamentos
+class Personeria
 {
-    private $conexion;
-    public $idDepartamento, $nombre, $latitud, $longitud;
 
+    private $conexion;
     function __construct()
     {
         $con = new connect();
         $this->conexion = $con->connectDB();
     }
-
-    function Obtener()
-    {
+    function obternerCbo(){
         $respuesta = new stdClass();
-        $sql = "select id, nombre from mh_departamentos";
+        $sql = "select id, nombre from general_personeria";
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {
             $respuesta->mensaje = "EXITO";

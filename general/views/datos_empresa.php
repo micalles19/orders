@@ -4,6 +4,35 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
 $class = $id != 0 ? "" : "Disabled";
 $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
 ?>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-container--default .select2-selection--single {
+        height: 38px!important; /* ajusta la altura según tus necesidades */
+        line-height: 38px!important; /* asegúrate de que el texto esté centrado verticalmente */
+        padding-top:3px !important;
+    }
+
+</style>
+<style>
+    .image-container {
+        width: 350px; /* Ancho fijo para la imagen */
+        height: 125px; /* Alto fijo para la imagen */
+        border: 1px solid #ddd;
+        margin-top: 15px!important;
+        padding: 5px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover;
+        background-position: center;
+    }
+    .image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+    }
+</style>
 
 <div class="pagetitle">
     <h1>Administrar Datos de Empresa <span id="spnNombreUA"></span></h1>
@@ -67,6 +96,7 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                            placeholder="Nombre Comercial">
                                     <div class="invalid-feedback">Por favor un nombre comercial</div>
                                 </div>
+
                                 <div class="col-md-4">
                                     <label for="cboTipoPersoneria" class="form-label">Tipo de Personería</label>
                                     <select id="cboTipoPersoneria" class="form-select validar">
@@ -95,20 +125,24 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                     <div class="invalid-feedback">Por favor ingrese un Telefono</div>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="txtLogo" class="form-label">Logo</label>
-                                    <input type="file" class="form-control" id="txtLogo">
-                                    <div class="invalid-feedback">Por favor ingrese un logo</div>
+                                    <label for="txtLogo" class="form-label">Logo Empresa</label>
+                                    <input type="file" class="form-control" id="txtLogo" accept="image/*">
+                                    <div class="invalid-feedback">Por favor seleccione una imagen</div>
                                 </div>
+                                <div class="col-md-4">
+
+                                    <div class="image-container" id="imageContainer" >
+                                        <!-- Las imágenes temporales se mostrarán aquí -->
+                                    </div>
+                                </div>
+
 
 
                                 <div class="card-footer">
                                     <div class="text-center">
-                                        <?php if($id == 0) {?>
-                                            <button type="button" onclick="datos_empresa.validarCamposEmpresa()" class="btn btn-primary">Guardar</button>
-                                        <?php } else{ ?>
-                                            <button type="button" onclick="unidad_ambiental.validarCamposUpd()" class="btn btn-success">Actualizar</button>
-                                        <?php } ?>
-                                        <button type="button" onclick="generales.atras('administracion','adm_unidades_ambientales')" class="btn btn-secondary">Cancelar</button>
+                                        <button type="button" onclick="datos_empresa.validarCamposEmpresa('validar')" class="btn btn-primary">Guardar</button>
+
+                                        <button type="button" onclick="generales.atras('general','adm_empresas')" class="btn btn-secondary">Cancelar</button>
                                     </div>
                                 </div>
                             </form><!-- End Multi Columns Form -->
@@ -127,7 +161,6 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                             <th scope="col">#</th>
                                             <th scope="col">Codigo Actividad</th>
                                             <th scope="col">Nombre Actividad</th>
-                                            <th scope="col">Primaria</th>
                                             <th scope="col">Acciones</th>
                                         </tr>
                                         </thead>
@@ -135,6 +168,36 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                         </tbody>
                                     </table>
                                     <!-- End Table with stripped rows -->
+                                </div>
+                                <!--                            MODAL PARA AGREGAR EL GASTO MENSUAL-->
+                                <div class="modal fade" id="mdlAgregarActividadesEconomicas" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Ingresa las actividades económicas  <span id="spnPeriodo"></span> </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row" id="mdlConsumo">
+                                                    <input type="hidden" id="hdnIdActividadEco" value="0">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 10px!important;">
+                                                        <div class="row">
+                                                                <label for="cboActividadEconomica" class="form-label">Seleccionar Actividad Económica.</label>
+                                                                <select id="cboActividadEconomica" style=" width: 100%!important;" class="form-select cboSelect2 validarmdl limpiarMdlAct">
+                                                                </select>
+                                                                <div class="invalid-feedback">Seleccione una actividad</div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary" id="btnMdlGuardar"
+                                                        onclick="datos_empresa.agregarActividadEconomica()">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -163,6 +226,82 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                         </tbody>
                                     </table>
                                     <!-- End Table with stripped rows -->
+                                </div>
+                                <div class="modal fade" id="mdlSucursales" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Administrar Sucursal <span id="spnPeriodo"></span> </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row" id="mdlConsumo">
+                                                    <input type="hidden" id="hdnIdSucursal" value="0">
+                                                    <div class="col-md-12 col-sm-12 col-lg-12" style="padding-top: 5px!important;">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <label for="txtNombreSucursal" class="form-label">Nombre Sucursal.</label>
+                                                                <input type="text" id="txtNombreSucursal" class="form-control validarMdlSucursales " >
+                                                                <div class="invalid-feedback">Ingresa un Nombre de sucursal</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top: 5px!important; margin-top: 5px!important;">
+                                                            <div class="col-md-4">
+                                                                <label for="cboTipoEstablecimiento" class="form-label">Tipo Establecimiento.</label>
+                                                                <select class="form-select validarMdlSucursales" id="cboTipoEstablecimiento">
+                                                                    <option value="">Seleccione</option>
+                                                                </select>
+                                                                <div class="invalid-feedback">Selecciona un Tipo Establecimiento</div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <label for="txtResponsable" class="form-label">Responsable Sucursal.</label>
+                                                                <input type="text" id="txtResponsable" class="form-control validarMdlSucursales " >
+                                                                <div class="invalid-feedback">Ingresa un Responsable</div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="txtTelefonoSucursal" class="form-label">Telefono Sucursal.</label>
+                                                                <input type="text" id="txtTelefonoSucursal" class="form-control validarMdlSucursales " >
+                                                                <div class="invalid-feedback">Ingresa un Telefono</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top: 5px!important; margin-top: 5px!important;">
+                                                            <div class="col-md-4">
+                                                                <label for="txtCorreoSucursal" class="form-label">Correo Sucursal.</label>
+                                                                <input type="text" id="txtCorreoSucursal" class="form-control validarMdlSucursales " >
+                                                                <div class="invalid-feedback">Ingresa un Correo Valido</div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="cboDepartamentoSucursal" class="form-label">Departamento.</label>
+                                                                <select id="cboDepartamentoSucursal" class="form-select validarMdlSucursales" onchange="generales.obtenerMunicipiosByDepartamento('cboMunicipioSucursal', this.value)">
+                                                                </select>
+                                                                <div class="invalid-feedback">Seleccione un departamento</div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="cboMunicipioSucursal" class="form-label">Municipio.</label>
+                                                                <select id="cboMunicipioSucursal" style=" width: 100%!important;" class="form-select validarMdlSucursales ">
+                                                                    <option value="">Seleccione</option>
+                                                                </select>
+                                                                <div class="invalid-feedback">Seleccione un departamento</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="padding-top: 5px!important; margin-top: 5px!important;">
+                                                            <div class="col-md-12">
+                                                                <label for="txtDirección" class="form-label">Dirección.</label>
+                                                                <input type="text" id="txtDirección" class="form-control validarMdlSucursales">
+                                                                <div class="invalid-feedback">Ingresa una Dirección</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="button" class="btn btn-primary" id="btnMdlGuardar"
+                                                        onclick="datos_empresa.validarSucursal('validarMdlSucursales')">Guardar</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -345,5 +484,13 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
     </div>
 </section>
 <?php include './general/views/footer.php'; ?>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="./general/js/datos_empresa.js?v=2"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".cboSelect2").select2({
+            dropdownParent: $('#mdlAgregarActividadesEconomicas .modal-body')
+        });
+    });
+</script>

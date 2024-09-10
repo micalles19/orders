@@ -163,6 +163,10 @@ const generales = {
 
         return promedio;
     },
+    moverTab(id) {
+        console.log(id);
+        document.getElementById(id + "-tab").click();
+    },
 
 }
 

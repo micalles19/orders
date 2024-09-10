@@ -12,11 +12,10 @@ class Municipio
         $this->conexion = $con->connectDB();
     }
 
-    function Obtener()
+    function obtenerByDepartamento()
     {
         $respuesta = new stdClass();
-        $sql = "select id_municipio as id, id_departamento, nombre_municipio as nombre, latitud, longitud
-        from cat_municipios where id_departamento = {$this->idDepartamento}";
+        $sql = "select id, nombre from mh_municipios where idDepartamento = {$this->idDepartamento}";
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {
             $respuesta->mensaje = "EXITO";

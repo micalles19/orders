@@ -14,14 +14,14 @@
         <?php if ($_SESSION['general']['usuario'][0]->idRol ==1) { ?>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link collapsed" data-bs-target="#generales" data-bs-toggle="collapse" href="#">
                     <i class="fas fa-tools"></i><span>Configuraciones Generales</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="generales" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="?module=general&page=datos_empresa" id="datos_empresa">
-                            <i class="bi bi-circle"></i><span>Datos Empresa</span>
+                        <a href="?module=general&page=adm_empresas" id="adm_empresas">
+                            <i class="bi bi-circle"></i><span>Administrar Empresa</span>
                         </a>
                     </li>
                     <li>

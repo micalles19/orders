@@ -19,6 +19,18 @@ function mensajesAlertas(error = {}) {
                     location.reload();
                 })
                 break;
+
+            case "SESSION_DEAD":
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Su sesión Murió',
+                    showConfirmButton: false,
+                    timer: 3500
+                }).then((result) => {
+
+                })
+                break;
             case "EXITO_REDIR":
                 Swal.fire({
                     position: 'top-end',
@@ -48,12 +60,12 @@ function mensajesAlertas(error = {}) {
                     location.href = "?" + modulo + "&page=" + error.pagina + "" + parametro1 + "" + parametro2 + "" + parametro3;
                 })
                 break;
-                case "EXITO_TAG_SIN_ALERT":
-                    let modulo = typeof error.modulo !== 'undefined' ? '&module=' + error.modulo : "",
-                        parametro1 = typeof error.parametro !== 'undefined' ? "&" + error.parametro + "=" + btoa(error.valor) : "",
-                        parametro2 = typeof error.parametro2 !== 'undefined' ? "&" + error.parametro2 + "=" + btoa(error.valor2) : "",
-                        parametro3 = typeof error.parametro3 !== 'undefined' ? "&" + error.parametro3 + "=" + btoa(error.valor3) : "";
-                    location.href = "?" + modulo + "&page=" + error.pagina + "" + parametro1 + "" + parametro2 + "" + parametro3;
+            case "EXITO_TAG_SIN_ALERT":
+                let modulo = typeof error.modulo !== 'undefined' ? '&module=' + error.modulo : "",
+                    parametro1 = typeof error.parametro !== 'undefined' ? "&" + error.parametro + "=" + btoa(error.valor) : "",
+                    parametro2 = typeof error.parametro2 !== 'undefined' ? "&" + error.parametro2 + "=" + btoa(error.valor2) : "",
+                    parametro3 = typeof error.parametro3 !== 'undefined' ? "&" + error.parametro3 + "=" + btoa(error.valor3) : "";
+                location.href = "?" + modulo + "&page=" + error.pagina + "" + parametro1 + "" + parametro2 + "" + parametro3;
                 break;
             case "EXITO_DELETE":
                 Swal.fire({
@@ -77,12 +89,12 @@ function mensajesAlertas(error = {}) {
                     location.reload();
                 })
                 break;
-                case "EMAIL_ERROR":
+            case "EMAIL_ERROR":
                 Swal.fire({
                     position: 'top-end',
                     icon: 'error',
                     title: 'Contacte al Adminsitrador',
-                    text: 'Codigo de error: '+error.info,
+                    text: 'Codigo de error: ' + error.info,
                     showConfirmButton: true,
                 }).then((result) => {
 
@@ -121,7 +133,7 @@ function mensajesAlertas(error = {}) {
                     confirmButtonText: 'ok'
                 })
                 break;
-                case "USUARIO_NO_EXISTE":
+            case "USUARIO_NO_EXISTE":
                 Swal.fire({
                     title: 'Upss!',
                     text: "El nombre de usuario no existe",
@@ -153,16 +165,7 @@ function mensajesAlertas(error = {}) {
                 })
                 break;
 
-            case "NO_USUARIOS_ASIGNABLES":
-                Swal.fire({
-                    title: 'Upss!',
-                    text: "No se encontraron usuarios disponibles para asignar a la unidad ambiental",
-                    icon: 'warning',
-                    showCancelButton: false,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'ok'
-                })
-                break;
+
             case "INICIAR_SESION":
                 Swal.fire({
                     position: 'top-end',
@@ -192,30 +195,7 @@ function mensajesAlertas(error = {}) {
                     timer: 1500
                 });
                 break;
-            case 'NO_PERMISO_HT':
-                Swal.fire({
-                    position: 'top-center',
-                    icon: "error",
-                    title: "Acceso denegado",
-                    text: "Solo el representante de la unidad Ambiental puede completar la herramienta tecnica de evaluacion",
-                    showConfirmButton: false,
-                    timer: 4500
-                }).then((result) => {
-                    location.href = "?module=hga&page=adm_herramienta_tecnica"
-                })
-                break;
-                case 'SIN_CRITERIOS':
-                Swal.fire({
-                    position: 'top-center',
-                    icon: "error",
-                    title: "No existen criterios Registrados",
-                    text: "Lo sentimos, pero el administrador no ha registrado los criterios a evaluar",
-                    showConfirmButton: false,
-                    timer: 4500
-                }).then((result) => {
-                    location.href = "?module=hga&page=adm_herramienta_tecnica"
-                })
-                break;
+
             case 'SIN_PERMISOS':
                 Swal.fire({
                     position: 'top-end',
@@ -228,16 +208,24 @@ function mensajesAlertas(error = {}) {
                     location.href = "?module=hga&page=adm_herramienta_tecnica"
                 })
                 break;
-            case 'NO_PERMISO_REPRESENTANTE':
+            case 'REGISTRO_LOG':
                 Swal.fire({
-                    position: 'top-end',
-                    icon: "error",
-                    title: "Acceso Denegado",
-                    text: "Solo el representante de la unidad ambiental puede realizar esta acción",
-                    showConfirmButton: false,
-                    timer: 5000
-                }).then((result) => {
-                    location.reload()
+                    title: 'Upss!',
+                    text: "Ocurrió un error contacte a soporte y brinde el siguiente ID:" + error.idLog,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ok'
+                })
+                break;
+            default:
+                Swal.fire({
+                    title: 'Upss!',
+                    text: "Error Fatal, contacte a soporte y brinde las acciones que dieron este error",
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'ok'
                 })
                 break;
         }
@@ -294,7 +282,7 @@ function mensajesAlertas(error = {}) {
                     timer: 1500
                 });
                 break;
-                case 'CONFIGURAR_PRECIOS':
+            case 'CONFIGURAR_PRECIOS':
                 Swal.fire({
                     position: 'top-end',
                     icon: "info",

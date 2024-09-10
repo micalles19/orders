@@ -1,20 +1,15 @@
 <?php
+class TipoEstablecimiento{
 
-class Departamentos
-{
     private $conexion;
-    public $idDepartamento, $nombre, $latitud, $longitud;
-
     function __construct()
     {
         $con = new connect();
         $this->conexion = $con->connectDB();
     }
-
-    function Obtener()
-    {
+    function obtenerCbo(){
         $respuesta = new stdClass();
-        $sql = "select id, nombre from mh_departamentos";
+        $sql = "select id, nombre from mh_tipo_establecimiento where eliminado= 'N' ";
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {
             $respuesta->mensaje = "EXITO";

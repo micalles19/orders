@@ -46,6 +46,38 @@ switch (modulo) {
             }
         });
         break;
+        case "general":
+        var gene = document.querySelector("#generales");
+            gene.classList.remove("collapse");
+        let generales = document.querySelectorAll("#generales a")
+            generales.forEach(function (link) {
+            link.classList.remove('active');
+            var parentCollapse = link.closest('.collapse');
+            if (parentCollapse) {
+                parentCollapse.classList.remove('show');
+                var parentLink = parentCollapse.previousElementSibling;
+                if (parentLink) {
+                    parentLink.classList.remove('active');
+                }
+            }
+        });
+
+        // Luego, agrega la clase 'active' al enlace seleccionado y su elemento colapsable padre
+            generales.forEach(function (link) {
+            var href = link.getAttribute('id');
+            if (formulario === href) {
+                link.classList.add('active');
+                var parentCollapse = link.closest('.collapse');
+                if (parentCollapse) {
+                    var parentLink = parentCollapse.previousElementSibling;
+                    if (parentLink) {
+                        parentLink.classList.add('active');
+                    }
+                    parentCollapse.classList.add('show');
+                }
+            }
+        });
+        break;
 
     case "catalogos":
         var catal = document.querySelector("#catalogos");
