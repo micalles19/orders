@@ -77,7 +77,7 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="DTES-tab" data-bs-toggle="tab" data-bs-target="#DTES"
-                                    type="button" role="tab" aria-controls="DTES" aria-selected="false" >Datos DTE
+                                    type="button" role="tab" aria-controls="DTES" aria-selected="false" >Transmisión DTE
                             </button>
                         </li>
                     </ul>
@@ -212,7 +212,8 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Tipo Establecimiento</th>
+                                            <th scope="col">Nombre Sucursal</th>
+                                            <th scope="col">Tipo <br> Establecimiento</th>
                                             <th scope="col">Responsable</th>
                                             <th scope="col">Telefono</th>
                                             <th scope="col">Correo</th>
@@ -331,21 +332,13 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
 
                         <div class="tab-pane fade" id="DTES" role="tabpanel" aria-labelledby="DTES-tab">
                             <form class="row g-3">
-                                <div class="col-md-4">
-                                    <label for="cboEmiteDTE" class="form-label">¿Emite DTE?</label>
-                                    <select id="cboEmiteDTE" class="form-select validarDtes">
-                                        <option value="" selected disabled>Seleccione...</option>
-                                        <option value="1">SI</option>
-                                        <option value="0">NO</option>
-                                    </select>
-                                    <div class="invalid-feedback">Por favor ingrese un nombre</div>
-                                </div>
+                                <input id="hdnConfigDte" type="hidden" value="0">
                                 <div class="col-md-4">
                                     <label for="cboAmbiente" class="form-label">Tipo de Ambiente</label>
                                     <select id="cboAmbiente" class="form-select validarDtes">
                                         <option value="" selected disabled>Seleccione...</option>
-                                        <option value="00">Desarrollo</option>
-                                        <option value="01">Produccion</option>
+                                        <option value="1">Desarrollo</option>
+                                        <option value="2">Producción</option>
                                     </select>
                                     <div class="invalid-feedback">Por favor ingrese un nombre</div>
                                 </div>
@@ -367,7 +360,7 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                            placeholder="API">
                                     <div class="invalid-feedback">Por favor ingrese la clave privada</div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-8">
                                     <label for="txtUrlFirmador" class="form-label">URL Firmador</label>
                                     <input type="text" class="form-control validarDtes" id="txtUrlFirmador"
                                            placeholder="">
@@ -376,11 +369,7 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
 
                                 <div class="card-footer">
                                     <div class="text-center">
-                                        <?php if($id == 0) {?>
-                                            <button type="button" onclick="unidad_ambiental.validarCampos()" class="btn btn-primary">Guardar</button>
-                                        <?php } else{ ?>
-                                            <button type="button" onclick="unidad_ambiental.validarCamposUpd()" class="btn btn-success">Actualizar</button>
-                                        <?php } ?>
+                                        <button type="button" onclick="datos_empresa.validarDatosTransmision('validarDtes')" class="btn btn-primary">Guardar</button>
                                         <button type="button" onclick="generales.atras('administracion','adm_unidades_ambientales')" class="btn btn-secondary">Cancelar</button>
                                     </div>
                                 </div>
@@ -388,93 +377,6 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                         </div>
 
 
-                    </div>
-
-                    <!--                    MODAL PARA ASIGNARO ENCARGADOA A LOS DISTRITOS-->
-                    <div class="modal fade" id="mdlAsignarUsuarioDistrito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Asignar Usuario a <span id="spnUnidadAmbientalMdl"></span></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-6" id="divUsuariosAsignados">
-                                            <label for="cboAsignarUsuario" class="form-label">Usuarios no Asignados</label>
-                                            <select id="cboAsignarUsuario" class="form-select validarMdl">
-                                                <option value="" selected disabled>Seleccione...</option>
-                                            </select>
-                                            <div class="invalid-feedback">Selecione un usuario</div>
-                                        </div>
-                                        <div class="col-md-6" id="divDistritos">
-                                            <label for="cboDistrito" class="form-label">Distrito a Asignar</label>
-                                            <select id="cboDistrito" class="form-select validarMdl">
-                                                <option value="" selected disabled>Seleccione...</option>
-                                            </select>
-                                            <div class="invalid-feedback">Selecione un distrito</div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <br>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="chkRepresentante">
-                                                <label class="form-check-label" for="chkRepresentante">¿Representante ó encargado/a de unidad ambiental principal?</label>
-                                            </div>
-                                            <div class="invalid-feedback">Selecione</div>
-                                        </div>
-                                        <div class="col-md-6" id="divChkUnidadPrincipal">
-                                            <br>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="chkPrincipal">
-                                                <label class="form-check-label" for="chkPrincipal">¿Unidad Ambiental Principal?</label>
-                                            </div>
-                                            <div class="invalid-feedback">Selecione un valor</div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="button" class="btn btn-primary" onclick="unidad_ambiental.asignarUsuarioUA()">Guardar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--                   MODAL PARA ASIGNAR PERSONAS DE GESTION AMBIENTAL-->
-                    <div class="modal fade" id="mdlAsignarPersonaComite" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Integrante de comité de gestión ambiental de <span id="spnNombreUnidadAmbientalGAMdl"></span> </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="txtNombreIntegrante" class="form-label">Nombre Integrante</label>
-                                            <input type="text" class="form-control" id="txtNombreIntegrante">
-                                            <div class="invalid-feedback">Ingrese un nombre</div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="txtPuesto" class="form-label">Puesto Funcional</label>
-                                            <input type="text" class="form-control" id="txtPuesto">
-                                            <div class="invalid-feedback">Ingrese un nombre</div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="txtUnidadOrganizativa" class="form-label">Unidad Organizativa</label>
-                                            <input type="text" class="form-control" id="txtUnidadOrganizativa">
-                                            <div class="invalid-feedback">Ingrese un nombre</div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onclick="unidad_ambiental.guardaIntegranteComiteGA()">Guardar</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 

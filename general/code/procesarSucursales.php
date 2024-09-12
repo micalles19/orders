@@ -13,7 +13,7 @@ if (isset($_SESSION['general']['usuario'])) {
         $accion = isset($input['accion']) ? $input['accion'] : "";
     }
     include '../../general/code/MySQL_conection.php';
-    include_once './Clases/Sucursal.php.php';
+    include_once './Clases/Sucursal.php';
     include_once './Clases/GuardarErroresSistema.php';
     date_default_timezone_set('America/El_Salvador');
     $sucursal = new Sucursal();
@@ -21,22 +21,30 @@ if (isset($_SESSION['general']['usuario'])) {
     $sucursal->idTipoEstablecimiento = isset($_GET["idTipoEstablecimiento"]) ? $_GET["idTipoEstablecimiento"] : (isset($input["idTipoEstablecimiento"]) ? $input["idTipoEstablecimiento"] : (isset($_POST["idTipoEstablecimiento"]) ? $_POST["idTipoEstablecimiento"] : null));
     $sucursal->idEmpresa = isset($_GET["idEmpresa"]) ? $_GET["idEmpresa"] : (isset($input["idEmpresa"]) ? $input["idEmpresa"] : (isset($_POST["idEmpresa"]) ? $_POST["idEmpresa"] : null));
     $sucursal->responsable = isset($_GET["responsable"]) ? $_GET["responsable"] : (isset($input["responsable"]) ? $input["responsable"] : (isset($_POST["responsable"]) ? $_POST["responsable"] : null));
+    $sucursal->nombreSucursal = isset($_GET["nombreSucursal"]) ? $_GET["nombreSucursal"] : (isset($input["nombreSucursal"]) ? $input["nombreSucursal"] : (isset($_POST["nombreSucursal"]) ? $_POST["nombreSucursal"] : null));
     $sucursal->telefono = isset($_GET["telefono"]) ? $_GET["telefono"] : (isset($input["telefono"]) ? $input["telefono"] : (isset($_POST["telefono"]) ? $_POST["telefono"] : null));
     $sucursal->correo = isset($_GET["correo"]) ? $_GET["correo"] : (isset($input["correo"]) ? $input["correo"] : (isset($_POST["correo"]) ? $_POST["correo"] : null));
     $sucursal->idDepartamento = isset($_GET["idDepartamento"]) ? $_GET["idDepartamento"] : (isset($input["idDepartamento"]) ? $input["idDepartamento"] : (isset($_POST["idDepartamento"]) ? $_POST["idDepartamento"] : null));
     $sucursal->idMunicipio = isset($_GET["idMunicipio"]) ? $_GET["idMunicipio"] : (isset($input["idMunicipio"]) ? $input["idMunicipio"] : (isset($_POST["idMunicipio"]) ? $_POST["idMunicipio"] : null));
+    $sucursal->direccion = isset($_GET["direccion"]) ? $_GET["direccion"] : (isset($input["direccion"]) ? $input["direccion"] : (isset($_POST["direccion"]) ? $_POST["direccion"] : null));
     $sucursal->idUsuario = $_SESSION['general']['usuario'][0]->id;
-    $sucursal->hoy= date("Y-m-d H:i:s");
+    $sucursal->hoy = date("Y-m-d H:i:s");
 
     switch ($accion) {
         case "guardar":
             $respuesta = $sucursal->guardar();
             break;
+        case "obtenerSucursalesByEmpresa":
+            $respuesta = $sucursal->obtenerSucursalesByEmpresa();
+            break;
+        case "eliminarSucursalDetalle":
+            $respuesta = $sucursal->eliminarSucursalDetalle();
+            break;
         default:
             $respuesta = $accion;
             break;
     }
-}else{
-        $respuesta->mensaje ="SESSION_DEAD";
-    }
+} else {
+    $respuesta->mensaje = "SESSION_DEAD";
+}
 echo json_encode($respuesta);
