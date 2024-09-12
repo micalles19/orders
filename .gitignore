@@ -48,7 +48,7 @@ Thumbs.db
 *.mov
 *.wmv
 
-code/MySQL_conection.php
+general/code/MySQL_conection.php
 productos/images/*
 
 database/

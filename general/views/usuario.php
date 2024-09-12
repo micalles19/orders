@@ -50,14 +50,17 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
                             <input type="text" class="form-control validar" id="txtUsuario" placeholder="usuario">
                             <div class="invalid-feedback">Ingrese un usuario</div>
                         </div>
-                        <div class="col-md-4" id="divClave">
-                            <div class="password-container">
-                                <label for="password" class="form-label">Contraseña Temporal</label>
-                                <input type="password" id="txtClave" class="form-control" placeholder="Contraseña">
-                                <span id="togglePassword" class="toggle-password" onclick="togglePasswordVisibility()">
-                                  <i class="fas fa-eye"></i>
-                                </span>
-                            </div>
+                        <div class="col-md-4">
+                            <label for="cboTipoDocumento" class="form-label">Tipo Documento</label>
+                            <select class="form-select validar" id="cboTipoDocumento" onchange="generales.crearMaskPorTipoDocumento(this,'txtNumeroDocumento')">
+                                <option value="0" disabled selected>Seleccione ...</option>
+                            </select>
+                            <div class="invalid-feedback">Campo Requerido</div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="txtNumeroDocumento" class="form-label">Numero Documento (<span id="spnTipoDocumento"></span>) </label>
+                            <input class="form-control validar" type="text" value="" id="txtNumeroDocumento" required>
+                            <div class="invalid-feedback">Campo Requerido</div>
                         </div>
                         <div class="col-md-4">
                             <label for="cboRolUsuario" class="form-label">Rol</label>
@@ -67,18 +70,27 @@ $nombre = $id != 0 ? "Editar" : "Registrar";
                             </select>
                             <div class="invalid-feedback">Selecione un rol de usuario</div>
                         </div>
+                        <div class="col-md-4" id="divClave">
+                            <div class="password-container">
+                                <label for="password" class="form-label">Contraseña Temporal (Enviada)</label>
+                                <input type="password" id="txtClave" class="form-control" placeholder="Contraseña" readonly>
+                                <span id="togglePassword" class="toggle-password" onclick="togglePasswordVisibility()">
+                                  <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                        </div>
+
+
 
                     </form><!-- End Multi Columns Form -->
 
                 </div>
                 <div class="card-footer">
                     <div class="text-center">
-                        <?php if($id == 0) {?>
-                            <button type="button" onclick="usuario.validarCampos()" class="btn btn-success">Guardar</button>
-                        <?php } else{ ?>
-                            <button type="button" onclick="usuario.validarCamposUpd()" class="btn btn-success">Actualizar</button>
+                        <button type="button" onclick="usuario.validarCampos()" class="btn btn-success">Guardar</button>
+                        <?php if($id > 0) {?>
                             <button type="button" onclick="usuario.cambiarClave()" class="btn btn-primary">Enviar Clave Temporal</button>
-                        <?php } ?>
+                        <?php }?>
                         <button type="button" onclick="generales.atras('general','adm_usuarios')" class="btn btn-secondary">Cancelar</button>
 
                     </div>

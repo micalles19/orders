@@ -58,13 +58,13 @@ $modulo = isset($_GET["module"]) && $_GET["module"] != null ? $_GET["module"] : 
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cboTipoDocumento" class="form-label">Tipo Documento</label>
-                                        <select class="form-select validar" id="cboTipoDocumento" onchange="proveedor.changeTipoDoc(this)">
+                                        <select class="form-select validar" id="cboTipoDocumento" onchange="generales.crearMaskPorTipoDocumento(this,'txtNumeroDocumento')">
                                             <option value="0" disabled selected>Seleccione ...</option>
                                         </select>
                                         <div class="invalid-feedback">Campo Requerido</div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="txtNumeroDocumento" class="form-label">Numero Documento (<span id="spnTipoDocumento"></span>) </label>
+                                        <label for="txtNumeroDocumento" class="form-label">Número Documento (<span id="spnTipoDocumento"></span>) </label>
                                         <input class="form-control validar" type="text" value="" id="txtNumeroDocumento" required>
                                         <div class="invalid-feedback">Campo Requerido</div>
                                     </div>

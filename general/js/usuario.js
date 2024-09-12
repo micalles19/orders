@@ -1,12 +1,14 @@
 window.onload = () => {
     usuario.obtenerRoles().then(() => {
-        if (usuario.id.value > 0) {
-            usuario.obtenerById().then((respuesta) => {
-            })
-        }else{
-            document.getElementById("divClave").style.display = "none";
-        }
+        generales.obtenerTiposDocumentoIdentidad("cboTipoDocumento").then(()=>{
+            if (usuario.id.value > 0) {
+                usuario.obtenerById().then((respuesta) => {
+                })
+            }else{
+                document.getElementById("divClave").style.display = "none";
+            }
 
+        })
     })
 }
 const usuario = {
@@ -16,6 +18,8 @@ const usuario = {
     usuario: document.getElementById("txtUsuario"),
     rol: document.getElementById("cboRolUsuario"),
     clave: document.getElementById("txtClave"),
+    tipoDocumentoIdentidad : document.getElementById("cboTipoDocumento"),
+    numeroDocumento: document.getElementById("txtNumeroDocumento"),
 
     obtenerById() {
         return new Promise((resolve, reject) => {
@@ -41,12 +45,15 @@ const usuario = {
                 this.usuario.value = usuario.usuario;
                 this.usuario.style.readOnly =true;
                 this.clave.value = usuario.claveTemporal;
+                this.tipoDocumentoIdentidad.value = usuario.idTipoDocumentoIdentidad;
+                this.numeroDocumento.value = usuario.numeroDocumentoIdentidad
                 resolve();
             } else {
                 resolve(respuesta.mensaje);
             }
         })
     },
+
     guardar() {
         return new Promise(resolve => {
             fetchActions.set({
@@ -57,6 +64,8 @@ const usuario = {
                     nombres: this.nombres.value.trim(),
                     email: this.correo.value.trim(),
                     usuario: this.correo.value.trim(),
+                    tipoDocumentoIdentidad: this.tipoDocumentoIdentidad.value.trim(),
+                    numeroDocumento: this.numeroDocumento.value.trim(),
                     clave: this.clave.value.trim(),
                     rol: this.rol.value.trim()
                 }
@@ -74,12 +83,10 @@ const usuario = {
                     accion: "actualizar",
                     id: this.id.value.trim(),
                     nombres: this.nombres.value.trim(),
-                    apellidos: this.apellidos.value.trim(),
-                    puesto: this.puesto.value.trim(),
-                    usuario: this.usuario.value.trim(),
-                    correo: this.correo.value.trim(),
-                    tipoUsuario: this.tipoUsuario.value.trim(),
-                    estadoUsuario: this.estadoUsuario.value.trim()
+                    email: this.correo.value.trim(),
+                    tipoDocumentoIdentidad: this.tipoDocumentoIdentidad.value.trim(),
+                    numeroDocumento: this.numeroDocumento.value.trim(),
+                    rol: this.rol.value.trim()
                 }
             }).then(resolve)
         })
@@ -99,38 +106,39 @@ const usuario = {
     },
     validarCampos() {
         if (validar.InputTextsConClase("validar")) {
-            if (validar.formatoEmail(this.correo.value, "txtCorreo")) {
-                this.guardar().then((respuesta) => {
-                    if (respuesta.mensaje === "EXITO") {
-                        fetchActions.set({
-                            modulo: "general",
-                            archivo: "procesarEmails",
-                            datos: {
-                                accion: "reestablecerClaveFromAdmin",
-                                id: respuesta.id,
-                                correo: respuesta.email,
-                                nombre: respuesta.nombre,
-                                clave: respuesta.clave,
-                            }
-                        }).then((respuesta2) => {
-                            mensajesAlertas(respuesta2);
-                        })
-                    } else {
-                        mensajesAlertas(respuesta);
-                    }
-                })
-            }
-        }
-    },
-    validarCamposUpd() {
-        if (validar.InputTextsConClase("validar")) {
             if (validar.formatoEmail(this.correo.value, "txtCorreoReestablecimiento")) {
-                this.Actualizar().then((respuesta) => {
-                    mensajesAlertas(respuesta)
-                })
+                if (validar.formatoDocumentosIdentidad("cboTipoDocumento","txtNumeroDocumento")){
+                    console.log("vamos a actualizar")
+                    if (this.id.value > 0) {
+                        this.Actualizar().then((respuesta) => {
+                            mensajesAlertas(respuesta)
+                        })
+                    }else{
+                        this.guardar().then((respuesta) => {
+                            if (respuesta.mensaje === "EXITO") {
+                                fetchActions.set({
+                                    modulo: "general",
+                                    archivo: "procesarEmails",
+                                    datos: {
+                                        accion: "reestablecerClaveFromAdmin",
+                                        id: respuesta.id,
+                                        correo: respuesta.email,
+                                        nombre: respuesta.nombre,
+                                        clave: respuesta.clave,
+                                    }
+                                }).then((respuesta2) => {
+                                    mensajesAlertas(respuesta2);
+                                })
+                            } else {
+                                mensajesAlertas(respuesta);
+                            }
+                        })
+                    }
+                }
 
             }
         }
+
     },
     cambiarClave() {
         if (validar.formatoEmail(this.correo.value, this.correo.id)) {

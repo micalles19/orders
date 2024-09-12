@@ -1,7 +1,7 @@
 var tblAdmCatalogosCliente = "";
 window.onload = () => {
     $(".loader").fadeIn("fast");
-    proveedor.obtenerTiposDocumento().then(() => {
+    generales.obtenerTiposDocumento("cboTipoDocumento").then(() => {
         proveedor.obtenerActividadesEconomicas().then(() => {
             proveedor.obtenerDepartamentos().then(() => {
                 if (proveedor.id.value > 0) {
@@ -37,19 +37,6 @@ const proveedor = {
     municipio: document.getElementById("cboMunicipio"),
     direccion: document.getElementById("txtDireccion"),
 
-    obtenerTiposDocumento() {
-        return new Promise(resolve => {
-            fetchActions.get({
-                modulo: "general",
-                archivo: "procesarTipoDocumento",
-                params: {
-                    accion: "obtener"
-                }
-            }).then((respuesta) => {
-                generales.construirCbo("cboTipoDocumento", respuesta).then(resolve)
-            })
-        })
-    },
     obtenerActividadesEconomicas() {
         return new Promise(resolve => {
             fetchActions.get({
@@ -88,13 +75,6 @@ const proveedor = {
             generales.construirCbo('cboMunicipio', departamentos).then()
         })
     },
-
-    changeTipoDoc(selectElement){
-        this.numeroDocumento.value= "";
-        const selectedText = selectElement.options[selectElement.selectedIndex].text;
-        document.getElementById("spnTipoDocumento").innerText = selectedText;
-    },
-
     obtenerCliente() {
         return new Promise((resolve, reject) => {
             fetchActions.get({

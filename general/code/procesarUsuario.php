@@ -18,18 +18,18 @@ include_once './Clases/Usuario.php';
 date_default_timezone_set('America/El_Salvador');
 
 $usuario = new Usuario();
-$usuario->hoy = date("Y-m-d H:i:s");
-if (isset($_SESSION['generales']['usuario']["id"])) {
-    $usuario->idUsuario = $_SESSION['generales']['usuario']["id"];
-}
 
-$usuario = new Usuario();
 $usuario->id =isset($_GET["id"]) ? $_GET["id"] : (isset($input["id"]) ? $input["id"] : (isset($_POST["id"]) ?? $_POST["id"]));
 $usuario->email = isset($input["email"]) && !empty($input["email"]) ? $input["email"] :0;
 $usuario->usuario = isset($input["usuario"]) && !empty($input["usuario"]) ? $input["usuario"] :0;
 $usuario->clave = isset($input["clave"]) && !empty($input["clave"]) ? $input["clave"] :0;
 $usuario->nombre = isset($input["nombres"]) && !empty($input["nombres"]) ? $input["nombres"] :0;
 $usuario->rol = isset($input["rol"]) && !empty($input["rol"]) ? $input["rol"] :0;
+$usuario->tipoDocumentoIdentidad =isset($_GET["tipoDocumentoIdentidad"]) ? $_GET["tipoDocumentoIdentidad"] : (isset($input["tipoDocumentoIdentidad"]) ? $input["tipoDocumentoIdentidad"] : (isset($_POST["tipoDocumentoIdentidad"]) ? $_POST["tipoDocumentoIdentidad"] : null));
+$usuario->numeroDocumento = isset($_GET["numeroDocumento"]) ? $_GET["numeroDocumento"] : (isset($input["numeroDocumento"]) ? $input["numeroDocumento"] : (isset($_POST["numeroDocumento"]) ? $_POST["numeroDocumento"] : null));
+$usuario->idUsuario = $_SESSION['general']['usuario'][0]->id;
+
+$usuario->hoy = date("Y-m-d H:i:s");
 switch ($accion) {
 
     case "iniciarSesion":

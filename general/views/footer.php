@@ -31,9 +31,13 @@
 <script src="assets/vendor/datatables_new/datatables.js"></script>
 <script src="general/js/scripts_generales.js?v=1"></script>
 <script src="general/js/fetch_lib.js?v=1"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/vendor/fontawesome/js/fontawesome.js"></script>
 <script src="general/js/scripts_alertas.js?v=1"></script>
+
+<!--librerias cargadas del exterior-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7/jquery.inputmask.min.js"></script>
+
 
 </body>
 

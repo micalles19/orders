@@ -17,6 +17,39 @@
 })();
 
 const generales = {
+    obtenerTiposDocumentoIdentidad(idCbo) {
+        return new Promise(resolve => {
+            fetchActions.get({
+                modulo: "general",
+                archivo: "procesarTipoDocumento",
+                params: {
+                    accion: "obtener"
+                }
+            }).then((respuesta) => {
+                generales.construirCbo(idCbo, respuesta).then(resolve)
+            })
+        })
+    },
+    crearMaskPorTipoDocumento(selectElement,idNumeroDocumento){
+
+        var selectedText = selectElement.options[selectElement.selectedIndex].text;
+        document.getElementById("spnTipoDocumento").innerText = selectedText;
+        var inputNumeroDocumento = document.getElementById(idNumeroDocumento);
+        inputNumeroDocumento.value = "";
+        // Limpiar cualquier máscara anterior
+        Inputmask.remove(inputNumeroDocumento);
+        switch (selectElement.value){
+            case "1":
+                Inputmask({ mask: "9999-999999-999-9", placeholder: "_" }).mask(inputNumeroDocumento);
+                break;
+            case "2":
+                Inputmask({ mask: "99999999-9", placeholder: "_" }).mask(inputNumeroDocumento);
+                break;
+            default:
+                inputNumeroDocumento.value = "";  // Limpia el valor
+                break;
+        }
+    },
     obtenerDepartamentos(nombreCbo) {
         return new Promise(resolve => {
             fetchActions.get({
@@ -284,7 +317,43 @@ const validar = {
             $("#" + rbExentoSi.id).parent().parent().find(".invalid-feedback").fadeIn("fast");
             return false;
         }
-}
+},
+
+    formatoDocumentosIdentidad(idTipoDocumento, idNumeroDocumento) {
+        var tipoDocumento = document.getElementById(idTipoDocumento).value;
+        var numeroDocumento = document.getElementById(idNumeroDocumento).value;
+        var feedbackElement = $("#" + idNumeroDocumento).parent().find(".invalid-feedback");
+
+        // Definición de patrones (expresiones regulares) para DUI y NIT
+        var regexDUI = /^\d{8}-\d{1}$/;  // Formato: 00000000-0
+        var regexNIT = /^\d{4}-\d{6}-\d{3}-\d{1}$/;  // Formato: 0000-000000-000-0
+
+        // Resetear el mensaje de error antes de la validación
+        feedbackElement.text("").fadeOut("fast");
+
+        switch (tipoDocumento) {
+            case "1": // NIT
+                if (!regexNIT.test(numeroDocumento)) {
+                    feedbackElement.text("Formato de NIT incorrecto. Debe ser 0000-000000-000-0").fadeIn("fast");
+                    return false;
+                }
+                break;
+            case "2": // DUI
+                if (!regexDUI.test(numeroDocumento)) {
+                    feedbackElement.text("Formato de DUI incorrecto. Debe ser 00000000-0").fadeIn("fast");
+                    return false;
+                }
+                break;
+            default:
+
+                return true;
+        }
+
+        // Si el formato es correcto, ocultar el mensaje de error
+        feedbackElement.fadeOut("fast");
+        return true;
+    }
+
 };
 
 

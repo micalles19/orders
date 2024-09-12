@@ -9,6 +9,8 @@ class Usuario
         $usuario,
         $clave,
         $rol,
+        $tipoDocumentoIdentidad,
+        $numeroDocumento,
         $idUsuario,
         $hoy;
 
@@ -37,7 +39,9 @@ class Usuario
     function obtenerById()
     {
         $respuesta = new stdClass();
-        $sql = "SELECT usu.id, usu.nombre, usu.email, rol.id as idRol, rol.nombre as nombreRol, usu.claveTemporal, usu.usuario  FROM general_usuarios usu
+        $sql = "SELECT usu.id, usu.nombre, usu.email, rol.id as idRol, rol.nombre as nombreRol, usu.claveTemporal, usu.usuario, 
+                usu.idTipoDocumentoIdentidad, usu.numeroDocumentoIdentidad
+            FROM general_usuarios usu
           inner join general_roles rol on usu.idRol = rol.id where usu.id = {$this->id} and usu.eliminado = 'N'";
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {
@@ -106,7 +110,8 @@ class Usuario
     function Guardar()
     {
         $respuesta = new stdClass();
-        $sql = "insert into general_usuarios (nombre, email, usuario, clave, idRol) values(:nombre, :email, :usuario, :clave,:rol)";
+        $sql = "insert into general_usuarios (nombre, email, usuario, clave, idRol,idTipoDocumentoIdentidad, numeroDocumentoIdentidad, idUsuarioCrea) 
+                values(:nombre, :email, :usuario, :clave,:rol,:idTipoDocumentoIdentidad, :numeroDocumentoIdentidad, :idUsuarioCrea)";
         $stmt = $this->conexion->prepare($sql);
         $clave = md5($this->clave);
         $stmt->bindParam(":nombre", $this->nombre);
@@ -114,6 +119,9 @@ class Usuario
         $stmt->bindParam(":usuario", $this->usuario);
         $stmt->bindParam(":clave", $clave);
         $stmt->bindParam(":rol", $this->rol);
+        $stmt->bindParam(":idTipoDocumentoIdentidad", $this->tipoDocumentoIdentidad);
+        $stmt->bindParam(":numeroDocumentoIdentidad", $this->numeroDocumento);
+        $stmt->bindParam(":idUsuarioCrea", $this->idUsuario);
 
         if ($stmt->execute()) {
             $respuesta->mensaje = "EXITO";
@@ -130,12 +138,14 @@ class Usuario
     function Actualizar()
     {
         $respuesta = new stdClass();
-        $sql = "update general_usuarios set nombre=:nombre, email=:email, clave=:clave, idRol=:rol where id=:idUsuario";
+        $sql = "update general_usuarios set nombre=:nombre, email=:email,idTipoDocumentoIdentidad =:idTipoDocumentoIdentidad,
+                            numeroDocumentoIdentidad=:numeroDocumentoIdentidad,idRol=:rol where id=:idUsuario";
         $stmt = $this->conexion->prepare($sql);
-        $clave = md5($this->clave);
+
         $stmt->bindParam(":nombre", $this->nombre);
         $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":clave", $clave);
+        $stmt->bindParam(":idTipoDocumentoIdentidad", $this->tipoDocumentoIdentidad);
+        $stmt->bindParam(":numeroDocumentoIdentidad", $this->numeroDocumento);
         $stmt->bindParam(":rol", $this->rol);
         $stmt->bindParam(":idUsuario", $this->id);
 
