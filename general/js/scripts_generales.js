@@ -17,6 +17,19 @@
 })();
 
 const generales = {
+    obtenerCondicionesVenta(idCbo){
+        return new Promise(resolve => {
+            fetchActions.get({
+                modulo: "general",
+                archivo: "procesarCondicionesVenta",
+                params: {
+                    accion: "obtener"
+                }
+            }).then((respuesta) => {
+                generales.construirCbo(idCbo, respuesta).then(resolve)
+            })
+        })
+    },
     obtenerTiposDocumentoIdentidad(idCbo) {
         return new Promise(resolve => {
             fetchActions.get({
@@ -50,6 +63,20 @@ const generales = {
                 break;
         }
     },
+    obtenerPaises(idCbo) {
+        return new Promise(resolve => {
+            fetchActions.get({
+                modulo: "general",
+                archivo: "procesarPaises",
+                params: {
+                    accion: "obtener"
+                }
+            }).then((respuesta) => {
+                this.construirCbo(idCbo, respuesta).then(resolve)
+            })
+        })
+    },
+
     obtenerDepartamentos(nombreCbo) {
         return new Promise(resolve => {
             fetchActions.get({

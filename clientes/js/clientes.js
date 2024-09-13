@@ -2,18 +2,25 @@ var tblAdmCatalogosCliente = "";
 window.onload = () => {
     clientes.obtenerTiposDocumento().then(() => {
         clientes.obtenerActividadesEconomicas().then(() => {
-            clientes.obtenerDepartamentos().then(() => {
-                if (clientes.id.value > 0) {
-                    clientes.obtenerCliente().then(() => {
-                        //dibujar info del cliente
-                        clientes.inicializarDatatable().then(() => {
-                            // clientes.obtenerComprasCliente().then(() => {
-                            //
-                            // })
-                        })
+            generales.obtenerCondicionesVenta("cboCondicionVenta").then(()=>{
+                generales.obtenerPaises("cboPais").then(()=>{
+                    clientes.obtenerDepartamentos().then(() => {
+                        if (clientes.id.value > 0) {
+                            clientes.obtenerCliente().then(() => {
+                                //dibujar info del cliente
+                                clientes.inicializarDatatable().then(() => {
+                                    // clientes.obtenerComprasCliente().then(() => {
+                                    //
+                                    // })
+                                    $('.cboSelect2').select2('refresh');
+                                })
+                            })
+                        }
                     })
-                }
+                })
+
             })
+
         })
     })
 }
@@ -119,8 +126,9 @@ const clientes = {
                 this.telefono.value = cliente[0]["telefono"];
                 this.departamento.value = cliente[0]["idDepartamento"];
                 $('#cboDepartamento').trigger('change');
-                sleep(2000).then(() => {
+                sleep(4000).then(() => {
                     document.getElementById("cboMunicipio").value = cliente[0]["idMunicipio"];
+
                 })
                 this.direccion.value = cliente[0]["direccion"];
                 resolve();

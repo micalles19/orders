@@ -57,13 +57,15 @@ $modulo = isset($_GET["module"]) && $_GET["module"] != null ? $_GET["module"] : 
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cboTipoDocumento" class="form-label">Tipo Documento</label>
-                                        <select class="form-select" id="cboTipoDocumento" onchange="clientes.changeTipoDoc(this)">
+                                        <select class="form-select" id="cboTipoDocumento" onchange="generales.crearMaskPorTipoDocumento(this,'txtNumeroDocumento')">
                                             <option value="0" disabled selected>Seleccione ...</option>
                                         </select>
+                                        <div class="invalid-feedback">Campo Requerido</div>
                                     </div>
                                     <div class="col-md-4">
-                                        <label for="txtNumeroDocumento" class="form-label">Numero Documento (<span id="spnTipoDocumento"></span>) </label>
+                                        <label for="txtNumeroDocumento" class="form-label">Número Documento (<span id="spnTipoDocumento"></span>) </label>
                                         <input class="form-control" type="text" value="" id="txtNumeroDocumento" required>
+                                        <div class="invalid-feedback">Campo Requerido</div>
                                     </div>
                                 </div>
                                 <div class="row" style="padding-bottom: 20px;">
@@ -77,23 +79,86 @@ $modulo = isset($_GET["module"]) && $_GET["module"] != null ? $_GET["module"] : 
                                             <option value="0" disabled selected>Seleccione ...</option>
                                         </select>
                                     </div>
+                                    <div class="col-md-2">
+                                        <label for="cboCondicionVenta" class="form-label">Condición de Venta</label>
+                                        <select class="form-select" id="cboCondicionVenta">
+                                            <option value="0" disabled selected>Seleccione ...</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="rbClienteFrecuente" class="form-label">Cliente Frecuente</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rbClienteFrecuente"
+                                                   id="rbClienteFrecuenteSi" value="S"
+                                                   onchange="producto.validarExento(this.value)">
+                                            <label class="form-check-label" for="rbClienteFrecuenteSi">Sí</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rbClienteFrecuente"
+                                                   id="rbClienteFrecuenteNo" value="N"
+                                                   onchange="producto.validarExento(this.value)" checked >
+                                            <label class="form-check-label" for="rbClienteFrecuenteNo" >No</label>
+                                        </div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-bottom: 20px;">
+                                    <div class="col-md-2">
+                                        <label for="rbAplicaRetencion" class="form-label">¿Aplica Retención?</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rbAplicaRetencion"
+                                                   id="rbAplicaRetencionSi" value="S"
+                                                   onchange="producto.validarExento(this.value)">
+                                            <label class="form-check-label" for="rbAplicaRetencionSi">Sí</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rbAplicaRetencion"
+                                                   id="rbAplicaRetencionNo" value="N"
+                                                   onchange="producto.validarExento(this.value)" checked >
+                                            <label class="form-check-label" for="rbAplicaRetencionNo" >No</label>
+                                        </div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="rbExcentoSi" class="form-label">¿Es exento?</label><br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rbExcento"
+                                                   id="rbExcentoSi" value="S"
+                                                   onchange="producto.validarExento(this.value)">
+                                            <label class="form-check-label" for="rbAplicaRetencionSi">Sí</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="rbExcento"
+                                                   id="rbExcentoNo" value="N"
+                                                   onchange="producto.validarExento(this.value)" checked >
+                                            <label class="form-check-label" for="rbExcentoNo" >No</label>
+                                        </div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                    </div>
                                     <div class="col-md-4">
                                         <label for="txtEmail" class="form-label">Correo Electrónico</label>
                                         <input class="form-control" type="email" value="" id="txtEmail">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="txtTelefono" class="form-label">Número Contacto</label>
+                                        <input class="form-control" type="text" value=""
+                                               id="txtTelefono">
                                     </div>
                                 </div>
 
 
                                 <div class="row" style="padding-bottom: 20px;">
 
+
                                     <div class="col-md-4">
-                                        <label for="txtTelefono" class="form-label">Número Contacto</label>
-                                        <input class="form-control" type="text" value=""
-                                               id="txtTelefono">
+                                        <label for="cboPais" class="form-label">Pais</label>
+                                        <select class="form-select cboSelect2" id="cboPais">
+                                            <option value="0" disabled selected>Seleccione ...</option>
+                                        </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cboDepartamento" class="form-label">Departamento</label>
-                                        <select class="form-select" id="cboDepartamento"
+                                        <select class="form-select cboSelect2" id="cboDepartamento"
                                                 onchange="clientes.obtenerMunicipios(this.value)">
                                             <option value="0" disabled selected>Seleccione ...</option>
                                         </select>
