@@ -1,10 +1,16 @@
 "use strict";
 
-import sweet from "../sweetMessages.js";
+import formFunctions from "../custom/formFunctions.js";
+import sweet from "../custom/sweetMessages.js";
 
-!(function () {})();
+!(function () {
+  // document.getElementById("loginFrm").addEventListener("submit", function (e) {
+  //   e.preventDefault();
+  //   loginConfig.auth();
+  // });
+})();
 
-const loader = document.querySelector(".loader");
+const loader = document.querySelector(".loader-container");
 
 window.onload = () => {
   try {
@@ -16,5 +22,12 @@ window.onload = () => {
 
 const loginConfig = {
   fields: {},
-  auth:async function(){}
+  form: "loginFrm",
+  auth: async function () {
+    try {
+      if (!formFunctions.check({ id: this.form })) return;
+    } catch (err) {
+      sweet.error(err);
+    }
+  },
 };

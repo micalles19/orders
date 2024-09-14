@@ -1,4 +1,4 @@
-import { getURLParam } from "./generalResources.js";
+import { getURLParam } from "../generalResources.js";
 
 const fetchFunctions = {};
 

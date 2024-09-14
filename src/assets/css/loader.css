@@ -1,0 +1,28 @@
+.loader-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0, 0, 0, 0.298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 15px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #000;
+    box-shadow: -20px 0px,20px 0px;
+    animation: l18 1s infinite;
+  }
+  @keyframes l18{ 
+    25%  {box-shadow: -20px -20px, 20px 20px}
+    50%  {box-shadow:   0px -20px,  0px 20px}
+    75%  {box-shadow:  20px -20px,-20px 20px}
+    100% {box-shadow:  20px   0px,-20px  0px}
+  }
