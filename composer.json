@@ -1,0 +1,8 @@
+{
+  "require": {
+    "phpoffice/phpword": "v0.18.*",
+    "tecnickcom/tcpdf": "^6.3",
+    "vlucas/phpdotenv": "^3.6",
+    "phpmailer/phpmailer": "6.6.5"
+  }
+}

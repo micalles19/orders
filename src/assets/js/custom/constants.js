@@ -1,4 +1,4 @@
-const SESSION_INDEX = 'MHRestaurant';
+const SESSION_INDEX = 'GUNOMCFA';
 
 export {
     SESSION_INDEX

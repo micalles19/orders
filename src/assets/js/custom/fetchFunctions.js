@@ -1,4 +1,4 @@
-import { getURLParam } from "../generalResources.js";
+import { getURLParam } from "./general.js";
 
 const fetchFunctions = {};
 
@@ -10,7 +10,7 @@ fetchFunctions.get = function ({
 }) {
   return new Promise(async (resolve, reject) => {
     try {
-      const htmlLoader = document.querySelector(".loader");
+      const htmlLoader = document.querySelector(".loader-container");
 
       showLoader && htmlLoader && htmlLoader.classList.remove("d-none");
 
@@ -66,7 +66,7 @@ fetchFunctions.post = function ({
 }) {
   return new Promise(async (resolve, reject) => {
     try {
-      const htmlLoader = document.querySelector(".loader");
+      const htmlLoader = document.querySelector(".loader-container");
 
       showLoader && htmlLoader && htmlLoader.classList.remove("d-none");
 
@@ -118,7 +118,7 @@ fetchFunctions.postWithFiles = function ({
 }) {
   return new Promise(async (resolve, reject) => {
     try {
-      const htmlLoader = document.querySelector(".loader");
+      const htmlLoader = document.querySelector(".loader-container");
 
       showLoader && htmlLoader && htmlLoader.classList.remove("d-none");
 

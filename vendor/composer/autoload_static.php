@@ -4,124 +4,84 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6b7472bcd653311e339385d87a65f8d9
+class ComposerStaticInit5315734c994552b56ece4f5edfb7b5c5
 {
     public static $files = array (
-        'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
-        'b46ad4fe52f4d1899a2951c7e6ea56b0' => __DIR__ . '/..' . '/voku/portable-utf8/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'v' => 
-        array (
-            'voku\\helper\\' => 12,
-            'voku\\' => 5,
-        ),
-        'Z' => 
-        array (
-            'ZipStream\\' => 10,
-        ),
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php72\\' => 23,
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
-            'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
-            'Symfony\\Polyfill\\Iconv\\' => 23,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
         'P' => 
         array (
-            'Psr\\SimpleCache\\' => 16,
-            'Psr\\Http\\Message\\' => 17,
-            'Psr\\Http\\Client\\' => 16,
-            'PhpOffice\\PhpSpreadsheet\\' => 25,
+            'PhpOption\\' => 10,
+            'PhpOffice\\PhpWord\\' => 18,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'M' => 
+        'L' => 
         array (
-            'Matrix\\' => 7,
+            'Laminas\\Escaper\\' => 16,
         ),
-        'C' => 
+        'D' => 
         array (
-            'Complex\\' => 8,
+            'Dotenv\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'voku\\helper\\' => 
+        'Symfony\\Polyfill\\Ctype\\' => 
         array (
-            0 => __DIR__ . '/..' . '/voku/anti-xss/src/voku/helper',
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'voku\\' => 
+        'PhpOption\\' => 
         array (
-            0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
-            1 => __DIR__ . '/..' . '/voku/portable-utf8/src/voku',
+            0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'ZipStream\\' => 
+        'PhpOffice\\PhpWord\\' => 
         array (
-            0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+            0 => __DIR__ . '/..' . '/phpoffice/phpword/src/PhpWord',
         ),
-        'Symfony\\Polyfill\\Php72\\' => 
+        'PHPMailer\\PHPMailer\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Laminas\\Escaper\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+            0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
         ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        'Dotenv\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
-        ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
-        ),
-        'Symfony\\Polyfill\\Iconv\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-iconv',
-        ),
-        'Psr\\SimpleCache\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
-        ),
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
-        ),
-        'Psr\\Http\\Client\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-client/src',
-        ),
-        'PhpOffice\\PhpSpreadsheet\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
-        ),
-        'Matrix\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
-        ),
-        'Complex\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+        'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
+        'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
+        'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
+        'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
+        'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
+        'TCPDFBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_1d.php',
+        'TCPDF_COLORS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_colors.php',
+        'TCPDF_FILTERS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_filters.php',
+        'TCPDF_FONTS' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_fonts.php',
+        'TCPDF_FONT_DATA' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_font_data.php',
+        'TCPDF_IMAGES' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_images.php',
+        'TCPDF_IMPORT' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_import.php',
+        'TCPDF_PARSER' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_parser.php',
+        'TCPDF_STATIC' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_static.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6b7472bcd653311e339385d87a65f8d9::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6b7472bcd653311e339385d87a65f8d9::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit6b7472bcd653311e339385d87a65f8d9::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5315734c994552b56ece4f5edfb7b5c5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5315734c994552b56ece4f5edfb7b5c5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5315734c994552b56ece4f5edfb7b5c5::$classMap;
 
         }, null, ClassLoader::class);
     }
