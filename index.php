@@ -1,11 +1,11 @@
 <?php
-require_once __DIR__.'/src/code/models/AppModel.php';
+require_once __DIR__.'/src/code/app.php';
 
 App::checkIsHttps();
 
 $view = 'main';
 
-App::checkIsSessionStarted() ?: $view = 'login';
+App::isLogged() ?: $view = 'login';
 
 $viewURL = __DIR__.'/src/views/'.$view.'Page.php';
 

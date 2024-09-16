@@ -78,22 +78,6 @@ class User
                 $this->$key = $value;
             }
 
-            // $this->username = $requestData->user->username;
-            // $this->email = $requestData->user->email;
-            // $this->firstname = $requestData->user->firstname;
-            // $this->lastname = $requestData->user->lastname;
-            // $this->userPhotoFilename = $requestData->user->userPhotoFilename;
-            // $this->passwordExpirationDate = $requestData->user->passwordExpirationDate;
-            // $this->isFirstLogin = $requestData->user->isFirstLogin;
-            // $this->passwordChangeRequested = $requestData->user->passwordChangeRequested;
-            // $this->loginAttemptsRemaining = $requestData->user->loginAttemptsRemaining;
-            // $this->isLocked = $requestData->user->isLocked;
-            // $this->firstLogin = $requestData->user->firstLogin;
-            // $this->lastLogin = $requestData->user->lastLogin;
-            // $this->createdAt = $requestData->user->createdAt;
-            // $this->updatedAt = $requestData->user->updatedAt;
-            // $this->statusCode = $requestData->user->statusCode;
-
             return $this->startSession($connection);
         } catch (PDOException $e) {
             return (object)[

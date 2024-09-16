@@ -1,18 +1,32 @@
-<?php
-$image = __DIR__ . '/../../assets/img/not-found.svg';
-?>
-<div class="container">
+<div class="d-flex flex-column flex-center flex-column-fluid">
+    <div class="d-flex flex-column flex-center text-center p-10">
+        <div class="card card-flush w-lg-650px py-5">
+            <div class="card-body py-15 py-lg-20">
 
-    <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-        <h1>404</h1>
-        <h2>Lo sentimos, pero no encontramos el recurso</h2>
-        <a class="btn" href="#">Regresar al inicio</a>
-        <img src="<?= $image ?>" class="img-fluid py-5" alt="Page Not Found">
-        <div class="credits">
+                <h1 class="fw-bolder fs-2hx text-gray-900 mb-4">Oops!</h1>
+
+                <div class="fw-semibold fs-6 text-gray-500 mb-7">No encontramos el recurso solicitado.</div>
+
+                <div class="mb-3">
+                    <img src="src/assets/img/auth/404-error.png" class="mw-100 mh-300px theme-light-show" alt="" />
+                    <img src="src/assets/img/auth/404-error-dark.png" class="mw-100 mh-300px theme-dark-show" alt="" />
+                </div>
+
+                <div class="mb-0">
+                    <a href="./" class="btn btn-sm btn-primary">Regresar a inicio</a>
+                </div>
+
+            </div>
         </div>
-    </section>
+
+    </div>
 
 </div>
-<?php
-// include './general/views/footer.php';
-?>
+
+<script type="text/javascript">
+    window.onload = function() {
+        const loader = document.querySelector('.loader-container');
+
+        loader && loader.classList.add('d-none');
+    }
+</script>
