@@ -162,7 +162,7 @@ const datos_empresa = {
     },
     construirTblActividadesEconomicas() {
         return new Promise((resolve, reject) => {
-            if (this.arrayActividadesEconomicas.mensaje !== "SIN_DATOS") {
+            if (this.arrayActividadesEconomicas.mensaje !== "NO_DATOS") {
                 this.arrayActividadesEconomicas.datos.forEach(dato => {
                     this.contadorAct++;
                     this.addRowTableActividadesEconomicas(dato);
@@ -326,8 +326,8 @@ const datos_empresa = {
             "<i class='fas fa-edit'></i>" +
             "</button>" +
             "&nbsp;" +
-            "<button class='btn btn-outline-success btn-sm' type='button' title='Configurar Sucursal' onclick=' datos_empresa.asignarPuntoVenta(" + id + ");'>" +
-            "<i class='fas fa-cogs'></i>" +
+            "<button class='btn btn-outline-success btn-sm' type='button' title='Configurar Puntos de venta' onclick=' datos_empresa.asignarPuntoVenta(" + id + ");'>" +
+            "<i class='fa-solid fa-cash-register'></i>" +
             "</button>" +
             "&nbsp;" +
             "<button class='btn btn-outline-danger btn-sm' type='button' title='Eliminar' onclick=' datos_empresa.eliminarSucursalEmpresa(" + id + ");'>" +
@@ -374,27 +374,32 @@ const datos_empresa = {
         })
     },
     mostrarModalSucursales() {
-        $(".loader").fadeIn("fast");
-        validar.limpiarInputs("validarMdlSucursales").then(() => {
-            this.obtenerTipoEstablecimiento().then(() => {
-                generales.obtenerDepartamentos("cboDepartamentoSucursal").then(() => {
-                    $('#mdlSucursales').modal('show');
-                    $(".loader").fadeOut("fast");
+        return new Promise(resolve => {
+            $(".loader").fadeIn("fast");
+            validar.limpiarInputs("validarMdlSucursales").then(() => {
+                this.obtenerTipoEstablecimiento().then(() => {
+                    generales.obtenerDepartamentos("cboDepartamentoSucursal").then(() => {
+                        $('#mdlSucursales').modal('show');
+                        $(".loader").fadeOut("fast");
+                        resolve();
+                    })
                 })
             })
         })
+
     },
     validarSucursal(claseValidar) {
         if (validar.InputTextsConClase(claseValidar)) {
             let idSucursal = document.getElementById("hdnIdSucursal").value,
                 correo = document.getElementById("txtCorreoSucursal").value.trim();
-            if (validar.formatoEmail(correo, "txtCorreoSucursal"))
+            if (validar.formatoEmail(correo, "txtCorreoSucursal")) {
                 if (idSucursal > 0) {
-
+                    this.actualizarSucursal().then(mensajesAlertas)
                 } else {
                     this.guardarSucursal().then(mensajesAlertas)
 
                 }
+            }
 
         }
     },
@@ -409,6 +414,69 @@ const datos_empresa = {
                     nombreSucursal: document.getElementById("txtNombreSucursal").value.trim(),
                     idTipoEstablecimiento: document.getElementById("cboTipoEstablecimiento").value.trim(),
                     responsable: document.getElementById("txtResponsable").value,
+                    codigoEstablecimiento: document.getElementById("txtCodigoEstablecimientoMh").value.trim(),
+                    telefono: document.getElementById("txtTelefonoSucursal").value,
+                    correo: document.getElementById("txtCorreoSucursal").value,
+                    idDepartamento: document.getElementById("cboDepartamentoSucursal").value,
+                    idMunicipio: document.getElementById("cboMunicipioSucursal").value,
+                    direccion: document.getElementById("txtDirección").value
+                }
+            }).then((respuesta) => {
+                resolve(respuesta);
+            })
+        })
+    },
+    verSucursalEmpresa(idSucursal) {
+        this.mostrarModalSucursales().then(() => {
+            fetchActions.get({
+                modulo: "general",
+                archivo: "procesarSucursales",
+                params: {
+                    accion: "obtenerSucursalById",
+                    id: idSucursal
+                }
+            }).then((respuesta) => {
+                this.construirSucursal(respuesta).then();
+
+            })
+        })
+    },
+    construirSucursal(respuesta) {
+        return new Promise(resolve => {
+            if (respuesta.mensaje !== "NO_DATOS") {
+                respuesta.datos.forEach(dato => {
+                    document.getElementById("hdnIdSucursal").value = dato.id;
+                    document.getElementById("txtNombreSucursal").value = dato.nombreSucursal;
+                    document.getElementById("cboTipoEstablecimiento").value = dato.idTipoEstablecimiento;
+                    document.getElementById("txtResponsable").value = dato.responsable;
+                    document.getElementById("txtCodigoEstablecimientoMh").value = dato.codigoEstablecimiento;
+                    document.getElementById("txtTelefonoSucursal").value = dato.telefono;
+                    document.getElementById("txtCorreoSucursal").value = dato.correo;
+                    document.getElementById("cboDepartamentoSucursal").value = dato.idDepartamento;
+                    $('#cboDepartamentoSucursal').trigger('change');
+                    sleep(2000).then(() => {
+                        document.getElementById("cboMunicipioSucursal").value = dato.idMunicipio;
+                    })
+                    document.getElementById("txtDirección").value = dato.direccion;
+                })
+            }
+            resolve();
+        })
+
+    },
+    actualizarSucursal() {
+        return new Promise(resolve => {
+            fetchActions.set({
+                modulo: "general",
+                archivo: "procesarSucursales",
+                datos: {
+                    accion: "actualizar",
+                    id: document.getElementById("hdnIdSucursal").value.trim(),
+                    idEmpresa: this.id.value,
+                    nombreSucursal: document.getElementById("txtNombreSucursal").value.trim(),
+                    idTipoEstablecimiento: document.getElementById("cboTipoEstablecimiento").value.trim(),
+                    responsable: document.getElementById("txtResponsable").value,
+                    codigoEstablecimiento: document.getElementById("txtCodigoEstablecimientoMh").value.trim(),
                     telefono: document.getElementById("txtTelefonoSucursal").value,
                     correo: document.getElementById("txtCorreoSucursal").value,
                     idDepartamento: document.getElementById("cboDepartamentoSucursal").value,
@@ -421,6 +489,9 @@ const datos_empresa = {
         })
     },
 
+    asignarPuntoVenta(idSucursal){
+        window.location.href = "?&module=general&page=sucursal_punto_venta&idSucursal="+btoa(idSucursal);
+    },
     // PESTAÑA DTE
     obtenerDatosTransmionDte() {
         return new Promise(resolve => {
@@ -453,22 +524,22 @@ const datos_empresa = {
     validarDatosTransmision(claseValidar) {
         if (validar.InputTextsConClase(claseValidar)) {
             let idConf = document.getElementById("hdnConfigDte").value;
-                if (idConf > 0) {
-                    this.actualizarDatosTransmisionDTE().then(mensajesAlertas)
-                } else {
-                    this.guardarDatosTransmisionDTE().then(mensajesAlertas)
-                }
+            if (idConf > 0) {
+                this.actualizarDatosTransmisionDTE().then(mensajesAlertas)
+            } else {
+                this.guardarDatosTransmisionDTE().then(mensajesAlertas)
+            }
         }
     },
-    guardarDatosTransmisionDTE(){
+    guardarDatosTransmisionDTE() {
         return new Promise(resolve => {
             fetchActions.set({
-                modulo:'general',
-                archivo:'procesarDatosTransmisionDte',
-                datos :{
-                    accion : "guardar",
-                    idEmpresa : this.id.value,
-                    idTipoAmbiente : document.getElementById("cboAmbiente").value,
+                modulo: 'general',
+                archivo: 'procesarDatosTransmisionDte',
+                datos: {
+                    accion: "guardar",
+                    idEmpresa: this.id.value,
+                    idTipoAmbiente: document.getElementById("cboAmbiente").value,
                     clavePublica: document.getElementById("txtClavePublica").value,
                     clavePrivada: document.getElementById("txtClavePrivada").value,
                     passwordApi: document.getElementById("txtPassAPI").value,
@@ -477,16 +548,16 @@ const datos_empresa = {
             }).then(resolve);
         })
     },
-    actualizarDatosTransmisionDTE(){
+    actualizarDatosTransmisionDTE() {
         return new Promise(resolve => {
             fetchActions.set({
-                modulo:'general',
-                archivo:'procesarDatosTransmisionDte',
-                datos :{
-                    accion : "actualizar",
+                modulo: 'general',
+                archivo: 'procesarDatosTransmisionDte',
+                datos: {
+                    accion: "actualizar",
                     id: document.getElementById("hdnConfigDte").value,
-                    idEmpresa : this.id.value,
-                    idTipoAmbiente : document.getElementById("cboAmbiente").value,
+                    idEmpresa: this.id.value,
+                    idTipoAmbiente: document.getElementById("cboAmbiente").value,
                     clavePublica: document.getElementById("txtClavePublica").value,
                     clavePrivada: document.getElementById("txtClavePrivada").value,
                     passwordApi: document.getElementById("txtPassAPI").value,

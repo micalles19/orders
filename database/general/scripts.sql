@@ -105,6 +105,7 @@ create table general_datos_empresa_sucursales
     constraint FK_empresa_suc_usuario_id_registra foreign key (idUsuarioRegistra) references general_usuarios (id),
     constraint FK_empresa_suc_usuario_id_elimina foreign key (idUsuarioElimina) references general_usuarios (id)
 );
+alter table general_datos_empresa_sucursales add column  codigoEstablecimiento varchar(50) default null;
 
 create table general_datos_empresa_config_transmision_dte
 (

@@ -261,12 +261,17 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                                                 <div class="invalid-feedback">Ingresa un Responsable</div>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <label for="txtTelefonoSucursal" class="form-label">Telefono Sucursal.</label>
-                                                                <input type="text" id="txtTelefonoSucursal" class="form-control validarMdlSucursales " >
-                                                                <div class="invalid-feedback">Ingresa un Telefono</div>
+                                                                <label for="txtCodigoEstablecimientoMh" class="form-label">Código Establecimiento (MH).</label>
+                                                                <input type="text" id="txtCodigoEstablecimientoMh" class="form-control " >
+                                                                <div class="invalid-feedback">Ingresa el código</div>
                                                             </div>
                                                         </div>
                                                         <div class="row" style="padding-top: 5px!important; margin-top: 5px!important;">
+                                                            <div class="col-md-4">
+                                                                <label for="txtTelefonoSucursal" class="form-label">Teléfono Sucursal.</label>
+                                                                <input type="text" id="txtTelefonoSucursal" class="form-control validarMdlSucursales " >
+                                                                <div class="invalid-feedback">Ingresa un Telefono</div>
+                                                            </div>
                                                             <div class="col-md-4">
                                                                 <label for="txtCorreoSucursal" class="form-label">Correo Sucursal.</label>
                                                                 <input type="text" id="txtCorreoSucursal" class="form-control validarMdlSucursales " >
@@ -278,6 +283,9 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                                                 </select>
                                                                 <div class="invalid-feedback">Seleccione un departamento</div>
                                                             </div>
+
+                                                        </div>
+                                                        <div class="row" style="padding-top: 5px!important; margin-top: 5px!important;">
                                                             <div class="col-md-4">
                                                                 <label for="cboMunicipioSucursal" class="form-label">Municipio.</label>
                                                                 <select id="cboMunicipioSucursal" style=" width: 100%!important;" class="form-select validarMdlSucursales ">
@@ -285,9 +293,7 @@ $tab = isset($_GET["tag"]) ? base64_decode($_GET["tag"]) : "homeT";
                                                                 </select>
                                                                 <div class="invalid-feedback">Seleccione un departamento</div>
                                                             </div>
-                                                        </div>
-                                                        <div class="row" style="padding-top: 5px!important; margin-top: 5px!important;">
-                                                            <div class="col-md-12">
+                                                            <div class="col-md-8">
                                                                 <label for="txtDirección" class="form-label">Dirección.</label>
                                                                 <input type="text" id="txtDirección" class="form-control validarMdlSucursales">
                                                                 <div class="invalid-feedback">Ingresa una Dirección</div>

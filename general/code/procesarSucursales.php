@@ -27,12 +27,22 @@ if (isset($_SESSION['general']['usuario'])) {
     $sucursal->idDepartamento = isset($_GET["idDepartamento"]) ? $_GET["idDepartamento"] : (isset($input["idDepartamento"]) ? $input["idDepartamento"] : (isset($_POST["idDepartamento"]) ? $_POST["idDepartamento"] : null));
     $sucursal->idMunicipio = isset($_GET["idMunicipio"]) ? $_GET["idMunicipio"] : (isset($input["idMunicipio"]) ? $input["idMunicipio"] : (isset($_POST["idMunicipio"]) ? $_POST["idMunicipio"] : null));
     $sucursal->direccion = isset($_GET["direccion"]) ? $_GET["direccion"] : (isset($input["direccion"]) ? $input["direccion"] : (isset($_POST["direccion"]) ? $_POST["direccion"] : null));
+    $sucursal->codigoEstablecimiento = isset($_GET["codigoEstablecimiento"]) ? $_GET["codigoEstablecimiento"] : (isset($input["codigoEstablecimiento"]) ? $input["codigoEstablecimiento"] : (isset($_POST["codigoEstablecimiento"]) ? $_POST["codigoEstablecimiento"] : null));
     $sucursal->idUsuario = $_SESSION['general']['usuario'][0]->id;
     $sucursal->hoy = date("Y-m-d H:i:s");
 
     switch ($accion) {
         case "guardar":
             $respuesta = $sucursal->guardar();
+            break;
+            case "actualizar":
+            $respuesta = $sucursal->actualizar();
+            break;
+        case "obtenerSucursalById":
+            $respuesta = $sucursal->obtenerSucursalById();
+            break;
+            case "obtenerSucursalByIdyEmpresa":
+            $respuesta = $sucursal->obtenerSucursalByIdyEmpresa();
             break;
         case "obtenerSucursalesByEmpresa":
             $respuesta = $sucursal->obtenerSucursalesByEmpresa();
