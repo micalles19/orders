@@ -158,6 +158,52 @@
                     </li>
                 </ul>
             </li><!-- End Forms Nav -->
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#planillas" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-receipt"></i><span>PLANILLAS</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="planillas" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#planillaCatalogos">
+                            <i class="fa-solid fa-scroll" style="font-size: 15px!important;"></i><span>Catálogos</span><i class="bi bi-chevron-down ms-auto" style="font-size: 14px;"></i>
+                        </a>
+                        <ul id="planillaCatalogos" class="nav-content collapse" data-bs-parent="#planillaCatalogos">
+                            <li style="margin-left: 20px!important;">
+
+                                <a href="?module=planilla&page=adm_tipo_empleado" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="adm_tipo_empleado">
+                                    <i class="bi bi-circle"></i><span>Tipos de Empleado</span>
+                                </a>
+                                <a href="?module=planilla&page=adm_cargos_empleados" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="adm_cargos_empleados">
+                                    <i class="bi bi-circle"></i><span>Catálogo de Cargos</span>
+                                </a>
+                                <a href="?module=planilla&page=adm_catalogo_bancos" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="catalogo_bancos">
+                                    <i class="bi bi-circle"></i><span>Catálogo de Bancos</span>
+                                </a>
+                                <a href="?module=planilla&page=adm_catalogo_afp" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="catalogo_afp">
+                                    <i class="bi bi-circle"></i><span>Catálogo de AFP</span>
+                                </a>
+                                <a href="?module=planilla&page=adm_catalogo_seguros" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="adm_catalogo_seguros">
+                                    <i class="bi bi-circle"></i><span>Catálogo de Seguros</span>
+                                </a>
+
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="?module=planilla&page=amd_empleados" id="amd_empleados">
+                            <i class="bi bi-circle"></i><span>Empleados</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="?module=planilla&page=adm_planilla" id="adm_planilla">
+                            <i class="bi bi-circle"></i><span>Planillas</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
         <?php }?>
 <!--        ROL DE VENDEDOR-->
 
