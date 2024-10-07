@@ -212,10 +212,10 @@ switch (modulo) {
         });
         break;
 
-    case "educacion_ambiental":
-        var eduElemnet = document.querySelector("#educacion_ambiental");
+    case "planilla":
+        var eduElemnet = document.querySelector("#planilla");
         eduElemnet.classList.remove("collapse");
-        let edu = document.querySelectorAll("#educacion_ambiental .nav-item a")
+        let edu = document.querySelectorAll("#planilla .nav-item a")
         edu.forEach(function (link) {
             var href = link.getAttribute('id');
             if (formulario.indexOf(href) !== -1) {
@@ -228,9 +228,9 @@ switch (modulo) {
                 }
             }
         });
-        var edu2 = document.querySelector("#educacion_ambiental2");
+        var edu2 = document.querySelector("#planillaCatalogos");
         edu2.classList.remove("collapse");
-        let edu2p = document.querySelectorAll("#educacion_ambiental2 a")
+        let edu2p = document.querySelectorAll("#planillaCatalogos a")
         edu2p.forEach(function (link) {
             var href = link.getAttribute('id');
             if (formulario.indexOf(href) !== -1) {

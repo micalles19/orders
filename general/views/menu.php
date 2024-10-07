@@ -160,10 +160,10 @@
             </li><!-- End Forms Nav -->
             <hr>
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#planillas" data-bs-toggle="collapse" href="#">
+                <a class="nav-link collapsed" data-bs-target="#planilla" data-bs-toggle="collapse" href="#">
                     <i class="fa-solid fa-receipt"></i><span>PLANILLAS</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="planillas" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="planilla" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
                     <li class="nav-item">
                         <a class="nav-link collapsed" data-bs-toggle="collapse" href="#planillaCatalogos">

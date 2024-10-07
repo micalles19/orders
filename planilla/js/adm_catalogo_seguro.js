@@ -1,22 +1,21 @@
-var tblAfp = "";
+var tblSeguros = "";
 window.onload = () => {
     $(".loader").fadeIn("fast");
-    adm_catalogo_afp.inicializarDatatable().then(() => {
-        adm_catalogo_afp.obtener().then(() => {
+    adm_catalogo_seguro.inicializarDatatable().then(() => {
+        adm_catalogo_seguro.obtener().then(() => {
             $(".loader").fadeOut("fast");
         })
     })
-
 }
 
-const adm_catalogo_afp = {
+const adm_catalogo_seguro = {
     contador: 0,
 
     obtener() {
         return new Promise((resolve, reject) => {
             fetchActions.get({
                 modulo: "planilla",
-                archivo: "procesarCatalogoAfp",
+                archivo: "procesarCatalogoSeguro",
                 params: {
                     accion: "obtenerByTable",
                 }
@@ -28,8 +27,8 @@ const adm_catalogo_afp = {
 
     construirTable(data) {
         return new Promise(resolve => {
-            tblAfp.clear();
-            tblAfp.clear().draw();
+            tblSeguros.clear();
+            tblSeguros.clear().draw();
             if (data.mensaje !== "NO_DATOS") {
                 data.datos.forEach(dato => {
                     this.contador++;
@@ -37,14 +36,14 @@ const adm_catalogo_afp = {
                 })
             } else {
                 this.contador = 0;
-                tblAfp.clear();
+                tblSeguros.clear();
             }
-            tblAfp.columns.adjust().draw();
+            tblSeguros.columns.adjust().draw();
             resolve();
         })
     },
     editar(id) {
-        window.location.href = "?module=planilla&page=catalogo_afp&id="+ btoa(id)
+        window.location.href = "?module=planilla&page=catalogo_seguro&id="+ btoa(id)
     },
     eliminar(id){
         Swal.fire({
@@ -59,7 +58,7 @@ const adm_catalogo_afp = {
             if (result.isConfirmed) {
                 fetchActions.set({
                     modulo: "planilla",
-                    archivo: "procesarCatalogoAfp",
+                    archivo: "procesarCatalogoSeguro",
                     datos: {
                         id: id,
                         accion: "eliminar"
@@ -83,14 +82,14 @@ const adm_catalogo_afp = {
         })
     },
     addRowTable({id, nombre, porcentajePatronal, porcentajeTrabajador, techoMaximo}) {
-        tblAfp.row.add([
+        tblSeguros.row.add([
             this.contador,
             nombre,
             porcentajePatronal+"%", porcentajeTrabajador+"%", "$"+techoMaximo,
-            "<button class='btn btn-outline-success btn-sm' type='button' title='Editar' onclick=' adm_catalogo_afp.editar(" + id + ");'>" +
+            "<button class='btn btn-outline-success btn-sm' type='button' title='Editar' onclick=' adm_catalogo_seguro.editar(" + id + ");'>" +
             "<i class='fas fa-edit'></i>" +
             "</button> "+
-            "<button class='btn btn-outline-danger btn-sm' type='button' title='Eliminar' onclick=' adm_catalogo_afp.eliminar(" + id + ");'>" +
+            "<button class='btn btn-outline-danger btn-sm' type='button' title='Eliminar' onclick=' adm_catalogo_seguro.eliminar(" + id + ");'>" +
             "<i class='fas fa-trash-alt'></i>" +
             "</button> "
         ]).node().id = "trSubCat";
@@ -98,8 +97,8 @@ const adm_catalogo_afp = {
     inicializarDatatable() {
         return new Promise((resolve, reject) => {
             try {
-                if ($("#tblAfp").length > 0) {
-                    tblAfp = $("#tblAfp").DataTable({
+                if ($("#tblSeguros").length > 0) {
+                    tblSeguros = $("#tblSeguros").DataTable({
                         dateFormat: 'uk',
                         scrollX: false,
                         scrollY: 350,

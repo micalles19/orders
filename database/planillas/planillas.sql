@@ -75,7 +75,7 @@ create table planilla_cat_seguro
     constraint FK_CAT_SEGURO_USUARIO_REGISTRA_ID foreign key (idUsuarioRegistra) references general_usuarios (id),
     constraint FK_CAT_SEGURO_USUARIO_ELIMINA_ID foreign key (idUsuarioElimina) references general_usuarios (id)
 );
-
+alter table planilla_cat_seguro  add column descripcion text after  techoMaximo;
 
 create table planilla_empleado
 (
