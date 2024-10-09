@@ -58,8 +58,17 @@ create table planilla_cat_afp
     constraint FK_CAT_AFP_USUARIO_REGISTRA_ID foreign key (idUsuarioRegistra) references general_usuarios (id),
     constraint FK_CAT_AFP_USUARIO_ELIMINA_ID foreign key (idUsuarioElimina) references general_usuarios (id)
 );
-alter table planilla_cat_afp  add column descripcion text after  techoMaximo;
+alter table planilla_cat_afp
+    add column descripcion text after techoMaximo;
 
+create table planilla_cat_motivos_bajas
+(
+    id          int not null primary key auto_increment,
+    nombre      varchar(500),
+    descripcion text
+);
+
+insert into planilla_cat_motivos_bajas (nombre) values ('No Aplica'),('Renuncia'),('Despido'),('Juvilación');
 create table planilla_cat_seguro
 (
     id                   int not null primary key auto_increment,
@@ -75,7 +84,8 @@ create table planilla_cat_seguro
     constraint FK_CAT_SEGURO_USUARIO_REGISTRA_ID foreign key (idUsuarioRegistra) references general_usuarios (id),
     constraint FK_CAT_SEGURO_USUARIO_ELIMINA_ID foreign key (idUsuarioElimina) references general_usuarios (id)
 );
-alter table planilla_cat_seguro  add column descripcion text after  techoMaximo;
+alter table planilla_cat_seguro
+    add column descripcion text after techoMaximo;
 
 create table planilla_empleado
 (
@@ -91,7 +101,7 @@ create table planilla_empleado
     idEmpresaPertenece  int,
     idAfp               int,
     idSeguro            int,
-    numeroAfiliacion varchar(250),
+    numeroAfiliacion    varchar(250),
     idUsuarioRegistra   int,
     fechaRegistro       datetime default current_timestamp,
     eliminado           char(1)  default 'N',
@@ -105,4 +115,5 @@ create table planilla_empleado
     constraint FK_EMPLEADO_USUARIO_REGISTRA_ID foreign key (idUsuarioRegistra) references general_usuarios (id),
     constraint FK_EMPLEADO_USUARIO_ELIMINA_ID foreign key (idUsuarioElimina) references general_usuarios (id)
 );
-SELECT * FROM planilla_cat_tipo_empleado
+SELECT *
+FROM planilla_cat_tipo_empleado

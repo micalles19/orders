@@ -199,6 +199,33 @@ class Empresa
 
         return $respuesta;
     }
+    function obtenerByCbo()
+    {
+        $respuesta = new stdClass();
+        $sql = "";
+        try {
+            $sql = "select * from general_datos_empresa where eliminado = 0";
+            $query = $this->conexion->query($sql);
+            if ($query->rowCount() > 0) {
+                $respuesta->mensaje = "EXITO";
+                $respuesta->datos = $query->fetchAll(PDO::FETCH_OBJ);
+            } else {
+                $respuesta->mensaje = "NO_DATOS";
+            }
+        } catch (PDOException $e) {
+            $this->logs->mensaje = "ERROR OBTENER DATOS ";
+            $this->logs->funcionActual = "obtenerAll()";
+            $this->logs->archivo = $_SERVER['PHP_SELF'];
+            $this->logs->usuario = $this->idUsuario;
+            $this->logs->consultasql = $sql;
+            $this->logs->excepcion = 'Excepción ' . $e->getCode() . ': ' . $e->getMessage() . ' en la línea ' . $e->getLine() . ' del fichero ' . $e->getFile();
+            $respuesta->mensaje = $this->logs->guardarLogError();
+        } finally {
+            $this->conexion = null;
+        }
+
+        return $respuesta;
+    }
 
     function obtenerActividadesEconomicas()
     {

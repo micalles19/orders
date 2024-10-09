@@ -40,6 +40,9 @@ if (isset($_SESSION['general']['usuario'])) {
         case"obtenerById":
             $respuesta = $empresa->obtenerById();
             break;
+            case"obtenerByCbo":
+            $respuesta = $empresa->obtenerByCbo();
+            break;
         case "actualizar":
             $respuesta = $empresa->actualizar();
             break;

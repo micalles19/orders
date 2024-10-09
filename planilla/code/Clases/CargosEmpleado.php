@@ -99,7 +99,7 @@ class  CargosEmpleado
     {
         $respuesta = new  stdClass();
         try {
-            $sql = "select id, nombre from marcas where eliminado ='N' ";
+            $sql = "select id, nombre from planilla_cat_cargos where eliminado ='N' ";
             $query = $this->conexion->query($sql);
             if ($query->rowCount() > 0) {
                 $respuesta->mensaje = "EXITO";

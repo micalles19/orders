@@ -27,7 +27,7 @@ $usuario->nombre = isset($input["nombres"]) && !empty($input["nombres"]) ? $inpu
 $usuario->rol = isset($input["rol"]) && !empty($input["rol"]) ? $input["rol"] :0;
 $usuario->tipoDocumentoIdentidad =isset($_GET["tipoDocumentoIdentidad"]) ? $_GET["tipoDocumentoIdentidad"] : (isset($input["tipoDocumentoIdentidad"]) ? $input["tipoDocumentoIdentidad"] : (isset($_POST["tipoDocumentoIdentidad"]) ? $_POST["tipoDocumentoIdentidad"] : null));
 $usuario->numeroDocumento = isset($_GET["numeroDocumento"]) ? $_GET["numeroDocumento"] : (isset($input["numeroDocumento"]) ? $input["numeroDocumento"] : (isset($_POST["numeroDocumento"]) ? $_POST["numeroDocumento"] : null));
-$usuario->idUsuario = $_SESSION['general']['usuario'][0]->id;
+$usuario->idUsuario = isset($_SESSION['general']['usuario'][0]->id)&& !empty($_SESSION['general']['usuario'][0]->idUsuario)?$_SESSION['general']['usuario'][0]->idUsuario:0;
 
 $usuario->hoy = date("Y-m-d H:i:s");
 switch ($accion) {

@@ -193,7 +193,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="?module=planilla&page=amd_empleados" id="amd_empleados">
+                        <a href="?module=planilla&page=adm_empleados" id="adm_empleados">
                             <i class="bi bi-circle"></i><span>Empleados</span>
                         </a>
                     </li>
