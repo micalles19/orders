@@ -17,6 +17,19 @@
 })();
 
 const generales = {
+    obtenerEmpresas(idCbo){
+        return new Promise(resolve => {
+            fetchActions.get({
+                modulo: "general",
+                archivo: "procesarEmpresa",
+                params: {
+                    accion: "obtenerByCbo"
+                }
+            }).then((respuesta) => {
+                generales.construirCbo(idCbo, respuesta).then(resolve)
+            })
+        })
+    },
     obtenerCondicionesVenta(idCbo){
         return new Promise(resolve => {
             fetchActions.get({
@@ -175,6 +188,42 @@ const generales = {
             location.reload();
         })
     },
+    validar_sesion_expirada() {
+        if (validar.InputTextsConClase("validar")) {
+            this.iniciarSesion().then((respuesta) => {
+                if (respuesta.mensaje === "INICIAR_SESION"){
+                    $("#mdlRenovarSesion").modal("hide");
+                    $(".loader").fadeOut("fast");
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Sesion Reestablecida correctamente.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }else{
+                    mensajesAlertas(respuesta);
+                }
+            })
+        } else {
+            mensajesAlertas("VALIDACION_GENERAL")
+        }
+    },
+    iniciarSesion() {
+        return new Promise((resolve) => {
+            fetchActions.set({
+                modulo: "general",
+                archivo: "procesarUsuario",
+                datos: {
+                    usuario: document.getElementById("txtUsuario").value.trim(),
+                    clave: document.getElementById("txtClave").value.trim(),
+                    accion: "iniciarSesion"
+                }
+            }).then((respuesta) => {
+                resolve(respuesta);
+            })
+        })
+    },
     atras(modulo, pagina) {
         location.href = "?module=" + modulo + "&page=" + pagina;
     },
@@ -198,30 +247,6 @@ const generales = {
             array.push(0);
         }
         return array;
-    },
-    calcularConsumoPromedioArray(arr) {
-        // Verificar si los elementos son cadenas y convertirlos a números si es necesario
-        const numeros = arr.map(valor => {
-            // Verificar si el valor es una cadena
-            if (typeof valor === 'string') {
-                // Intentar convertir la cadena a número
-                const numero = parseFloat(valor);
-                // Verificar si la conversión fue exitosa
-                if (!isNaN(numero)) {
-                    return numero;
-                }
-            }
-            // Si no es una cadena o no se pudo convertir, devolver el valor original
-            return valor;
-        });
-
-        // Suma de todos los valores
-        const total = numeros.reduce((acc, valor) => acc + valor, 0);
-
-        // Calculando el promedio
-        const promedio = total / numeros.length;
-
-        return promedio;
     },
     moverTab(id) {
         console.log(id);

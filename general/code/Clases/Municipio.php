@@ -15,7 +15,7 @@ class Municipio
     function obtenerByDepartamento()
     {
         $respuesta = new stdClass();
-        $sql = "select id, nombre from mh_municipios where idDepartamento = {$this->idDepartamento}";
+        $sql = "select id, nombre from mh_municipios where idDepartamento = {$this->idDepartamento} and eliminado = 'N'";
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {
             $respuesta->mensaje = "EXITO";
@@ -30,7 +30,7 @@ class Municipio
     {
         $respuesta = new stdClass();
         $sql = "select id, nombreDistrito as nombre
-        from cat_municipios_distritos where idMunicipio = {$this->idMunicipio}";
+        from cat_municipios_distritos where idMunicipio = {$this->idMunicipio} and eliminado = 'N'" ;
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {
             $respuesta->mensaje = "EXITO";

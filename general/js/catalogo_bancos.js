@@ -15,7 +15,7 @@ const catalogo_bancos = {
     obtener() {
         return new Promise((resolve, reject) => {
             fetchActions.get({
-                modulo: "planilla",
+                modulo: "general",
                 archivo: "procesarCatalogoBancos",
                 params: {
                     accion: "obtenerById",
@@ -52,7 +52,7 @@ const catalogo_bancos = {
     guardar() {
         return new Promise(resolve => {
             fetchActions.set({
-                modulo: "planilla",
+                modulo: "general",
                 archivo: "procesarCatalogoBancos",
                 datos: {
                     accion: "guardar",
@@ -66,7 +66,7 @@ const catalogo_bancos = {
     actualizar() {
         return new Promise(resolve => {
             fetchActions.set({
-                modulo: "planilla",
+                modulo: "general",
                 archivo: "procesarCatalogoBancos",
                 datos: {
                     accion: "actualizar",

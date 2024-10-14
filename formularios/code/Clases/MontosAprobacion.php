@@ -1,14 +1,16 @@
 <?php
-
-class CatalogoBancos
+class MontosAprobacion
 {
-    private $conexion, $hoy;
+    private $conexion;
     public
         $id,
-        $nombre,
-        $descripcion,
+        $idCuenta,
+        $idUsuarioAutorizado,
+        $montoDesde ,
+        $montoHasta,
         $estado,
-        $idUsuario;
+        $idUsuario,
+        $hoy;
     function __construct()
     {
         $con = new connect();
@@ -22,8 +24,8 @@ class CatalogoBancos
     {
         $respuesta = new  stdClass();
         try {
-            $sql = "insert into planilla_cat_bancos (nombre, descripcion, idUsuarioRegistra)
-                value ('{$this->nombre}', '{$this->descripcion}', '{$this->idUsuario}')";
+            $sql = "insert into formularios_bancos_conf_montos_aprobacion (idCuentaBanco, idUsuarioAutorizado, montoDesde, montoHasta, estado, idUsuarioRegistra)
+                value ('{$this->idCuenta}', '{$this->idUsuarioAutorizado}', '{$this->montoDesde}','{$this->montoHasta}','{$this->estado}', {$this->idUsuario})";
             if ($this->conexion->query($sql)) {
                 $respuesta->mensaje = "EXITO";
             } else {
@@ -40,7 +42,7 @@ class CatalogoBancos
     {
         $respuesta = new  stdClass();
         try{
-            $sql = "update planilla_cat_bancos set nombre ='{$this->nombre}', descripcion ='{$this->descripcion}' where id = {$this->id}";
+            $sql = "update formularios_bancos_conf_montos_aprobacion set idUsuarioAutorizado ={$this->idUsuarioAutorizado}, idCuentaBanco ={$this->idCuenta}, montoDesde ='{$this->montoDesde}', montoHasta='{$this->montoHasta}', fechaActualiza ='{$this->hoy}', idUsuarioActualiza ={$this->idUsuario} where id = {$this->id}";
 
             $query = $this->conexion->query($sql);
             if ($query) {
@@ -59,7 +61,8 @@ class CatalogoBancos
     {
         $respuesta = new  stdClass();
         try {
-            $sql = "select id, nombre, descripcion from planilla_cat_bancos where id= {$this->id }";
+            $sql = "select id, idCuentaBanco, idUsuarioAutorizado, montoDesde, montoHasta, estado from formularios_bancos_conf_montos_aprobacion
+                    where id= {$this->id}";
             $query = $this->conexion->query($sql);
             if ($query->rowCount() > 0) {
                 $respuesta->mensaje = "EXITO";
@@ -80,7 +83,13 @@ class CatalogoBancos
     {
         $respuesta = new  stdClass();
         try {
-            $sql = "select id, nombre, descripcion from planilla_cat_bancos where eliminado ='N' ";
+            $sql = "select aprob.id, montoDesde, montoHasta, usu.nombre as usuarioAutorizado, 
+                    concat(empresa.nombre,'-',bancos.nombre,'(', cuenta.numeroCuenta,')') as banco, aprob.estado
+                    from formularios_bancos_conf_montos_aprobacion aprob
+                    inner join formularios_bancos_cuentas cuenta on aprob.idCuentaBanco = cuenta.id
+                    inner join general_datos_empresa empresa on cuenta.idEmpresa = empresa.id
+                    inner join planilla_cat_bancos bancos on cuenta.idBanco = bancos.id
+                    inner join general_usuarios usu on usu.id =  aprob.idUsuarioAutorizado where aprob.eliminado = 'N' and bancos.eliminado ='N' ";
             $query = $this->conexion->query($sql);
             if ($query->rowCount() > 0) {
                 $respuesta->mensaje = "EXITO";
@@ -100,7 +109,7 @@ class CatalogoBancos
     {
         $respuesta = new  stdClass();
         try {
-            $sql = "select id, nombre from marcas where eliminado ='N' ";
+            $sql = "select id from formularios_bancos_conf_montos_aprobacion where eliminado ='N' ";
             $query = $this->conexion->query($sql);
             if ($query->rowCount() > 0) {
                 $respuesta->mensaje = "EXITO";
@@ -120,7 +129,7 @@ class CatalogoBancos
     {
         $respuesta = new  stdClass();
         try {
-            $sql = "update planilla_cat_bancos set eliminado = 'S', idUsuarioElimina = '{$this->idUsuario}' where id = {$this->id}";
+            $sql = "update formularios_bancos_conf_montos_aprobacion set eliminado = 'S', idUsuarioElimina = '{$this->idUsuario}' where id = {$this->id}";
             $query = $this->conexion->query($sql);
             if ($query) {
                 $respuesta->mensaje = "EXITO";

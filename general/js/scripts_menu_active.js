@@ -244,6 +244,38 @@ switch (modulo) {
             }
         });
         break;
+    case "formularios":
+        var eduElemnet = document.querySelector("#formularios");
+        eduElemnet.classList.remove("collapse");
+        let formularios = document.querySelectorAll("#formularios .nav-item a")
+        formularios.forEach(function (link) {
+            var href = link.getAttribute('id');
+            if (formulario.indexOf(href) !== -1) {
+                link.classList.add('active');
+                var parentCollapse = link.closest('.collapse');
+                if (parentCollapse) {
+                    var parentLink = parentCollapse.previousElementSibling;
+                    parentLink.classList.add('active');
+                    parentCollapse.classList.add('show');
+                }
+            }
+        });
+        var formulariosCatalogos = document.querySelector("#formulariosCatalogos");
+        formulariosCatalogos.classList.remove("collapse");
+        let formulariosCatalogos2 = document.querySelectorAll("#formulariosCatalogos a")
+        formulariosCatalogos2.forEach(function (link) {
+            var href = link.getAttribute('id');
+            if (formulario.indexOf(href) !== -1) {
+                link.classList.add('active');
+                var parentCollapse = link.closest('.collapse');
+                if (parentCollapse) {
+                    var parentLink = parentCollapse.previousElementSibling;
+                    parentLink.classList.add('active');
+                    parentCollapse.classList.add('show');
+                }
+            }
+        });
+        break;
 
 
     case "transversalizacion":

@@ -24,6 +24,9 @@
                             <i class="bi bi-circle"></i><span>Administrar Empresa</span>
                         </a>
                     </li>
+                    <a href="?module=general&page=adm_catalogo_bancos" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="adm_catalogo_bancos">
+                        <i class="bi bi-circle"></i><span>Catálogo de Bancos</span>
+                    </a>
                     <li>
                         <a href="?module=general&page=adm_usuarios" id="adm_usuarios">
                             <i class="bi bi-circle"></i><span>Usuarios</span>
@@ -161,7 +164,7 @@
             <hr>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#planilla" data-bs-toggle="collapse" href="#">
-                    <i class="fa-solid fa-receipt"></i><span>PLANILLAS</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="fa-solid fa-hand-holding-dollar"></i></i><span>PLANILLAS</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="planilla" class="nav-content collapse " data-bs-parent="#sidebar-nav">
 
@@ -177,9 +180,6 @@
                                 </a>
                                 <a href="?module=planilla&page=adm_cargos_empleados" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="adm_cargos_empleados">
                                     <i class="bi bi-circle"></i><span>Catálogo de Cargos</span>
-                                </a>
-                                <a href="?module=planilla&page=adm_catalogo_bancos" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="catalogo_bancos">
-                                    <i class="bi bi-circle"></i><span>Catálogo de Bancos</span>
                                 </a>
                                 <a href="?module=planilla&page=adm_catalogo_afp" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="catalogo_afp">
                                     <i class="bi bi-circle"></i><span>Catálogo de AFP</span>
@@ -200,6 +200,37 @@
                     <li>
                         <a href="?module=planilla&page=adm_planilla" id="adm_planilla">
                             <i class="bi bi-circle"></i><span>Planillas</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#formularios" data-bs-toggle="collapse" href="#">
+                    <i class="fa-brands fa-wpforms"></i><span>FORMULARIOS</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="formularios" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" data-bs-toggle="collapse" href="#formulariosCatalogos">
+                            <i class="fa-solid fa-scroll" style="font-size: 15px!important;"></i><span>Catálogos</span><i class="bi bi-chevron-down ms-auto" style="font-size: 14px;"></i>
+                        </a>
+                        <ul id="formulariosCatalogos" class="nav-content collapse" data-bs-parent="#formulariosCatalogos">
+                            <li style="margin-left: 20px!important;">
+
+                                <a href="?module=formularios&page=adm_cuentas_banco" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="adm_cuentas_banco">
+                                    <i class="bi bi-circle"></i><span>Administrar Cuentas de banco</span>
+                                </a>
+                              <a href="?module=formularios&page=adm_conf_montos_aprobacion" style="padding-top: 5px!important; padding-bottom: 5px!important;" id="adm_conf_montos_aprobacion">
+                                  <i class="bi bi-circle"></i><span>Administrar montos de aprobación en transferencias</span>
+                              </a>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="?module=planilla&page=adm_empleados" id="adm_empleados">
+                            <i class="bi bi-circle"></i><span>Solicitud Transferencia Bancaria</span>
                         </a>
                     </li>
                 </ul>

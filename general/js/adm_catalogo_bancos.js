@@ -15,7 +15,7 @@ const adm_catalogo_bancos = {
     obtener() {
         return new Promise((resolve, reject) => {
             fetchActions.get({
-                modulo: "planilla",
+                modulo: "general",
                 archivo: "procesarCatalogoBancos",
                 params: {
                     accion: "obtenerByTable",
@@ -44,7 +44,7 @@ const adm_catalogo_bancos = {
         })
     },
     editar(id) {
-        window.location.href = "?module=planilla&page=catalogo_bancos&id="+ btoa(id)
+        window.location.href = "?module=general&page=catalogo_bancos&id="+ btoa(id)
     },
     eliminar(id){
         Swal.fire({
@@ -58,7 +58,7 @@ const adm_catalogo_bancos = {
         }).then((result) => {
             if (result.isConfirmed) {
                 fetchActions.set({
-                    modulo: "planilla",
+                    modulo: "general",
                     archivo: "procesarCatalogoBancos",
                     datos: {
                         id: id,

@@ -25,7 +25,7 @@ class Direccion
     function obtenerMunicipio($idDepartamento)
     {
         $respuesta = new stdClass();
-        $sql = "select * from mh_municipios where idDepartamento ='{$idDepartamento}' ";
+        $sql = "select * from mh_municipios where idDepartamento ='{$idDepartamento}' and eliminado ='N' ";
         $query = $this->conexion->query($sql);
         if ($query->rowCount() > 0) {
             $respuesta->mensaje = "EXITO";

@@ -13,7 +13,7 @@ create table mh_departamentos
     codigo varchar(5),
     nombre varchar(250)
 );
-
+select * from mh_departamentos
 create table mh_municipios
 (
     id             int not null primary key auto_increment,
@@ -21,6 +21,9 @@ create table mh_municipios
     codigo         varchar(5),
     nombre         varchar(250)
 );
+alter table  mh_municipios add column eliminado char(1) default 'N';
+update mh_municipios set mh_municipios.eliminado = 'S';
+
 
 create table mh_tipo_documento_identidad
 (

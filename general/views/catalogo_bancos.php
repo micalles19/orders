@@ -44,7 +44,7 @@ $modulo = isset($_GET["module"]) && $_GET["module"] != null ? $_GET["module"] : 
                 </div>
                 <div class="card-footer" align="center">
                     <button type="button" onclick="catalogo_bancos.validar('validar');" class="btn btn-outline-dark">Guardar</button>
-                    <button type="button" onclick="generales.atras('planilla','adm_Catalogo_bancos')" class="btn btn-outline-danger">Cancelar</button>
+                    <button type="button" onclick="generales.atras('general','adm_Catalogo_bancos')" class="btn btn-outline-danger">Cancelar</button>
                 </div>
             </div>
 

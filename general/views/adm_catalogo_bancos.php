@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="page-title-right">
-                    <a href="?module=planilla&page=catalogo_bancos" class="btn btn-outline-dark btn-sm">Nuevo Registro
+                    <a href="?module=general&page=catalogo_bancos" class="btn btn-outline-dark btn-sm">Nuevo Registro
                     </a>
                 </div>
 

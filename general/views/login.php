@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ORDERS / LOGIN</title>
-    <meta content="SINAMA" name="description">
-    <meta content="SINAMA" name="keywords">
+    <title>SIGE - LOGIN</title>
+    <meta content="SIGE" name="description">
+    <meta content="SIGE" name="keywords">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -28,12 +28,6 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style_personalizado.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: NiceAdmin - v2.2.0
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
 </head>
 <div class="loader" style="display:none;">
     <div class="spinner-grow" style="width: 50px; height: 50px;" role="status">
@@ -41,7 +35,7 @@
     <span class="loader-text">Cargando...</span>
 </div>
 <body>
-<main style="background: #313945 !important;">
+<main style="background:  !important;">
     <div class="container">
 
       <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -54,15 +48,16 @@
               <div class="card mb-3">
 
                 <div class="card-body">
+                    <div style="margin-top: -8%!important;">
+                        <h5 class="card-title text-center pb-0 fs-4">
+                        </h5>
                     <div class="d-flex justify-content-center py-4">
-                        <a href="index.html" class="logo d-flex align-items-center w-auto">
-<!--                            <img src="./images/logo_marn_gris.png" style="max-height: 100px !important;">-->
+                        <a href="#" class="logo d-flex align-items-center w-auto">
+                            <img src="./images/logos/grupo_universal.png" style="max-height: 80px !important;">
                         </a>
                     </div>
-                  <div style="margin-top: -8%!important;">
-                    <h5 class="card-title text-center pb-0 fs-4">¡BIENVENIDO/A!
-                  </h5>
-                    <p class="text-center small">Sistema de toma de ordenes
+
+                    <p class="text-center">Sistema de gestión empresarial
                     </p>
                   </div>
 

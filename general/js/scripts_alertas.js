@@ -164,8 +164,6 @@ function mensajesAlertas(error = {}) {
                     location.reload()
                 })
                 break;
-
-
             case "INICIAR_SESION":
                 Swal.fire({
                     position: 'top-end',
@@ -185,6 +183,9 @@ function mensajesAlertas(error = {}) {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                break;
+            case "RENOVAR_SESSION":
+
                 break;
             case 'VALIDACION_GENERAL':
                 Swal.fire({

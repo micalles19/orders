@@ -8,8 +8,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>ORDERS</title>
-    <meta content="" name="Sistema de indicadores de gestión ambiental (SIGA) SINAMA ">
-    <meta content="" name="SIGA, SINAMA">
+    <meta content="" name="SISTEMA DE GESTION EMPRESARIAL SIGE ">
+    <meta content="" name="SIGE GRUPO UNIVERSAL">
 
     <!-- Favicons -->
     <link href="images/gob.png" rel="icon">
@@ -48,8 +48,8 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="?page=home" class="logo d-flex align-items-center">
-            <img src="./images/logo_marn_bn.png">
+        <a href="#" class="logo d-flex align-items-center">
+            <img src="./images/logos/gu-blanco.png">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
