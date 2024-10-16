@@ -16,7 +16,7 @@ create table formularios_bancos_tipo_cuentas
 );
 insert into formularios_bancos_tipo_cuentas (nombre)
 values ('Cuenta Corriente'),
-       ('Cuenta de Ahorro')
+       ('Cuenta de Ahorro');
 create table formularios_bancos_cuentas
 (
     id                 int not null primary key auto_increment,
@@ -61,3 +61,64 @@ create table formularios_bancos_conf_montos_aprobacion
     constraint FK_FORM_CONF_MONTOS_USU_ACTUALIZA_ID foreign key (idUsuarioActualiza) references general_usuarios (id),
     constraint FK_FORM_CONF_MONTOS_USU_ELIMINA_ID foreign key (idUsuarioElimina) references general_usuarios (id)
 );
+
+create table formularios_banco_tipo_transferencia
+(
+    id     int not null primary key auto_increment,
+    nombre varchar(250)
+);
+insert into formularios_banco_tipo_transferencia (nombre)
+values ('Nacional'),
+       ('Internacional');
+create table formularios_bancos_cat_estados_transferencias
+(
+    id     int not null primary key auto_increment,
+    nombre varchar(250)
+);
+insert into formularios_bancos_cat_estados_transferencias (nombre)
+values ('Solicitado'),
+       ('Autorizado'),
+       ('Aplicado');
+
+create table formularios_banco_solicitudes_transferencias
+(
+    id                       bigint not null primary key auto_increment,
+    nombreAPagar             varchar(5000),
+    concepto                 text,
+    descripcion              text,
+    montoAPagar              decimal(11, 2),
+    idBancoDestino           int,
+    numeroCuentaDestino      varchar(1500),
+    idTipoCuentaBancoDestino int,
+    idTipoTransferencia      int,
+    tIntCuentaIntermediaria  varchar(1500),
+    tIntSWITF                varchar(500),
+    tIntBancoIntermediario   varchar(1500),
+    tIntIntermediarioABA     varchar(1500),
+    tIntSWITFintermediario   varchar(1500),
+    tIntIntermediario        varchar(1500),
+    tIntDetalles             text,
+    idEstadoTransferencia    int,
+    idUsuarioSolicita        int,
+    fechaSolicita            datetime,
+    idUsuarioAutoriza        int,
+    fechaAutoriza            datetime,
+    idUsuarioAplica          int,
+    fechaAplica              datetime,
+    idCuentaDebitar          int,
+    documentoRespaldo        char(1)  default 'N',
+    observaciones            text,
+    eliminado                char(1)  default 'N',
+    fechaRegistro            datetime default current_timestamp,
+    fechaElimina             datetime,
+    idUsuarioElimina         int,
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_BANCO_DEST FOREIGN KEY (idBancoDestino) REFERENCES planilla_cat_bancos (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_TCUEN_DEST FOREIGN KEY (idTipoCuentaBancoDestino) references formularios_bancos_tipo_cuentas (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_TIPO_TRANSF FOREIGN KEY (idTipoTransferencia) references formularios_banco_tipo_transferencia (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_ESTADO_TRANSFE FOREIGN KEY (idEstadoTransferencia) references formularios_bancos_cat_estados_transferencias (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_USR_SOLICITA FOREIGN KEY (idUsuarioSolicita) references general_usuarios (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_USR_AUTORIZA FOREIGN KEY (idUsuarioAutoriza) references general_usuarios (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_USR_APLICA FOREIGN KEY (idUsuarioAplica) references general_usuarios (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_CUENTA_DEBITAR FOREIGN KEY (idCuentaDebitar) references formularios_bancos_cuentas (id),
+    CONSTRAINT FK_FORM_BANCO_SOLI_TRANS_ID_USR_ELIMINA FOREIGN KEY (idUsuarioElimina) references general_usuarios (id)
+)   ;

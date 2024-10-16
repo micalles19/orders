@@ -229,7 +229,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="?module=planilla&page=adm_empleados" id="adm_empleados">
+                        <a href="?module=formularios&page=adm_solicitudes_transferencias" id="adm_solicitudes_transferencias">
                             <i class="bi bi-circle"></i><span>Solicitud Transferencia Bancaria</span>
                         </a>
                     </li>
